@@ -3,7 +3,7 @@
 // version : 4.0
 // maintainer : Lokesh Wani
 
-import React from 'react';
+// import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Login from '../pages/Login';
 import { Navigate } from 'react-router-dom';
