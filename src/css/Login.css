@@ -1,0 +1,279 @@
+
+
+/*css for login page*/
+.crm-login-page {
+	padding: 0;
+	display: flex;
+	align-items: center;
+	height: 100%;
+	position: fixed;
+	width: 100%;
+	top:0;
+}
+
+.crm-login-bg {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+	object-fit: cover;
+	object-position: center;
+}
+
+.crm-login-form {
+	position: absolute;
+	z-index: 9;
+	background: #fdfdfd;
+	height: auto;
+	left: 50%;
+	top: 50%;
+	width: 450px;
+	padding: 17px 30px 15px;
+	text-align: left;
+	border-radius: 15px;
+	overflow: hidden;
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+	justify-content: center;
+	transform: translate(-50%,-50%);
+}
+
+.crm-login-form form {
+	width: 100%;
+}
+
+.crm-login-form::after {
+	position: absolute;
+	content: "";
+	left: 0;
+	top: 0;
+	height: 80px;
+	width: 100%;
+	background: #fff;
+	z-index: -1;
+	border-bottom: 1px solid #cfd7ff;
+	box-shadow: 0 3px 5px 0 #00000010;
+}
+
+.crm-login-form form h3 {
+	font-size: 14px;
+	font-weight: 400;
+	margin: 0 0;
+	margin-bottom: 20px;
+	opacity: 1;
+	color: #3c2f2f;
+}
+
+.crm-login-form form h4 {
+	font-size: 20px;
+	position: relative;
+	padding-bottom: 18px;
+	margin-bottom: 7px;
+	margin-top: 42px;
+	color: #3a45ff;
+}
+
+.crm-login-form form h4::after {
+	content: "";
+	background: #3a45ff;
+	height: 3px;
+	width: 30px;
+	position: absolute;
+	bottom: 5px;
+	left: 0;
+}
+
+.crm-login-form form .form-label {
+	font-size: 14px;
+	font-weight: 500;
+	color: #090c37;
+}
+
+/* .crm-login-form form .form-control {
+	height: 45px;
+	font-size: 14px;
+	border-radius: 6px;
+	box-shadow: 0 3px 5px 0 #00000010;
+	border: 1px solid #d7e0ee;
+	padding-left: 35px;
+	font-weight: 400;
+} */
+
+.crm-login-form form .form-control {
+	height: 45px;
+	font-size: 14px;
+	border-radius: 6px;
+	box-shadow: none;
+	border: none;
+	padding-left: 40px;
+	font-weight: 500;
+	background: #ebeefd;
+}
+
+.crm-login-form form .form-control:focus, .crm-login-form form .form-control:active {
+	box-shadow: inset 0 0 10px #00000015;
+}
+
+.crm-login-form form .form-control::placeholder {
+	color: #9093c4;
+	font-weight: 400;
+
+}
+
+.crm-login-form .form-group svg {
+	position: absolute;
+	top: 41.8px;
+	width: 18px;
+	left: 10px;
+	color: #3a45ff;
+	stroke-width: 2;
+}
+
+.crm-login-form form a {
+	display: flex;
+	justify-content: flex-end;
+	font-size: 14px;
+	text-decoration: none;
+	min-height: 1.5rem;
+	align-items: center;
+}
+
+.crm-login-form form .btn.btn-primary {
+	height: 45px;
+	font-size: 14px;
+	min-width: 100%;
+	margin-top: 0;
+	border-radius: 6px;
+	box-shadow: 0 3px 5px 0 #00000010;
+	border-color: #3a45ff;
+	background: #3a45ff;
+	position: relative;
+	transition: all 0.2s linear;
+}
+
+.crm-login-form form .btn.btn-primary svg {
+	width: 18px;
+	position: absolute;
+	right: 15px;
+	top: 10px;
+	transition: all 0.2s linear;
+}
+
+.crm-login-form form .btn.btn-primary:hover {
+	background: #fff;
+	color: #3a45ff;
+}
+
+.crm-login-form form .btn.btn-primary:hover svg {
+	right: 20px;
+}
+
+.crm-login-form .form-check .form-check-label {
+	font-size: 14px;
+	color: #090c37;
+	font-weight: 400;
+	position: relative;
+	top: -1px;
+}
+
+.crm-login-form .form-group {
+	position: relative;
+}
+
+.crm-login-form .form-group svg {
+	position: absolute;
+	top: 42px;
+	width: 18px;
+	left: 12px;
+	color: #3a45ff;
+}
+
+.crm-login-form .form-group svg {
+	color: #454768;
+}
+
+p.crm-footer {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	color: #fff;
+	z-index: 9;
+	font-size: 12px;
+	text-align: center;
+}
+
+.crm-footer a {
+	text-decoration: none;
+	color: #fff;
+	font-weight: 500;
+}
+
+.crmLoginForm {
+	min-height: 330px;
+}
+
+.crmLoginForm.crmForgotForm a {
+	justify-content: center;
+	margin-top: 15px;
+	font-weight: 500;
+	color: #111;
+	transition: all 0.2s linear;
+}
+
+.crmLoginForm.crmForgotForm a:hover {
+	color: #3a45ff;
+}
+.crmLoginForm.crmForgotForm a svg {
+	width: 18px;
+	margin-right: 6px;
+}
+
+
+@media (max-width:1600px){
+
+	.crm-login-form form .form-control {
+		height: 40px;
+	}
+	.crm-login-form::after {
+		height: 75px;
+	}
+	.crm-login-form .form-group svg {
+		top: 40px;
+	}
+	.crm-login-form form .btn.btn-primary {
+		height: 40px;
+		margin-top: 0;
+
+	}
+	.crm-login-form form .btn.btn-primary svg {
+		top: 7px;
+	}
+}
+
+@media (max-width:767px){
+	.crm-login-page {
+		padding: 20px;
+		display: flex;
+		align-items: center;
+		height: 100%;
+		position: fixed;
+		width: 100%;
+		top: 0;
+		padding-bottom: 55px;
+		background: #fff;
+	}
+	.crm-login-form {
+		position: relative;
+		left: 0;
+		top: 0;
+		width: 100%;
+		padding: 15px 30px 25px;
+		text-align: left;
+		border-radius: 10px;
+		transform: none;
+	}
+}

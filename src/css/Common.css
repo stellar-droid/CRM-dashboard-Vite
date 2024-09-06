@@ -1,0 +1,404 @@
+form .form-control,
+form .form-select {
+    height: 40px;
+    font-size: 12px;
+    border-radius: 6px;
+    box-shadow: none;
+    border: 1px solid #dbdce8;
+    padding-left: 10px;
+    font-weight: 500;
+    color: #111;
+}
+
+form .form-control::placeholder {
+    color: #bfbfbf;
+}
+
+form .form-control:focus,
+form .form-control:active,
+form .form-select:focus,
+form .form-select:active {
+    box-shadow: inset 0 0 10px #00000005;
+}
+
+form .form-label, form .form-check-label {
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #090c37;
+    display: inline-block;
+    width: 100%;
+}
+
+.card-tabs ul.nav-tabs {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    border: none;
+}
+
+.card-tabs ul.nav-tabs li.nav-item {
+    width: auto;
+    padding: 0;
+}
+
+.card-tabs ul.nav-tabs li.nav-item button.active, .card-tabs ul.nav-tabs li.nav-item button:hover {
+    background: #0b5ae5;
+    color: #fff;
+}
+
+.card-tabs ul.nav-tabs li.nav-item button {
+    margin-right: 5px;
+}
+
+.card-tabs ul.nav-tabs li.nav-item button {
+    background: #ebf2ff;
+    padding: 8px 20px;
+    font-size: 14px;
+    border: none;
+    color: #0b5ae5;
+    font-weight: 500;
+}
+
+.tab-content {
+    border: 1px solid #dbe0e5;
+    padding: 10px;
+    border-radius: 7px;
+    font-size: 14px;
+}
+
+.p-multiselect.p-component.p-inputwrapper.p-multiselect-chip.p-inputwrapper-filled {
+    width: 100%;
+}
+
+.calendar-block input {
+    padding: 0;
+    height: 30px;
+    font-size: 12px;
+    border: none;
+    max-width: 350px;
+    box-shadow: none !important;
+}
+
+.calendar-block {
+    padding: .375rem .75rem;
+    height: 40px;
+    font-size: 12px;
+    border-radius: 6px;
+    box-shadow: none;
+    border: 1px solid #dbdce8;
+    padding-left: 10px;
+    font-weight: 500;
+    color: #111;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background: #fff;
+}
+
+.p-multiselect-label.p-placeholder {
+    font-size: 12px;
+    padding: .375rem .75rem;
+}
+
+.p-multiselect-trigger svg {
+    width: 12px;
+    height: 12px;
+}
+
+.p-multiselect-trigger {
+    width: 30px;
+}
+
+.p-multiselect-header {
+    padding: 10px;
+}
+
+ul.p-multiselect-items.p-component {
+    padding: 10px;
+}
+
+li.p-multiselect-item {
+    padding: 10px;
+    font-size: 12px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+}
+
+.p-checkbox .p-checkbox-box {
+    border: 1px solid #d1d5db;
+    background: #ffffff;
+    width: 18px;
+    height: 18px;
+    color: #4b5563;
+    border-radius: 6px;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+    outline-color: transparent;
+    top: 1px;
+    position: relative;
+}
+
+.p-multiselect.p-component.p-inputwrapper.p-multiselect-chip {
+    width: 100%;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    border: 1px solid #dbdce8;
+}
+
+.p-multiselect.p-multiselect-chip .p-multiselect-token {
+    padding: 5px 7px;
+    margin-right: 0.5rem;
+    background: #e5e7eb;
+    color: #4b5563;
+    border-radius: 16px;
+    font-size: 12px;
+    font-weight: 600;
+    padding-left: 15px;
+}
+
+
+.file-uploader {
+    height: 40px;
+    font-size: 12px;
+    border-radius: 6px;
+    box-shadow: none;
+    border: 1px solid #dbdce8;
+    padding: 5px;
+    font-weight: 500;
+    color: #111;
+}
+
+.file-uploader span.p-button.p-component.p-fileupload-choose {
+    padding: 5px 10px;
+    font-size: 12px;
+    border-radius: 4px;
+    border: none;
+    font-weight: 400;
+    background: #0b5ae5;
+}
+
+.file-uploader span.p-button.p-component.p-fileupload-choose svg {
+    width: 12px;
+    height: 12px;
+}
+
+span.p-button-label.p-clickable {
+    font-weight: 500;
+}
+
+form .p-radiobutton + label {
+    font-size: 12px;
+    font-weight: 500;
+    color: #666;
+}
+
+.p-datepicker table td > span {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    transition: box-shadow 0.2s;
+    border: 1px solid transparent;
+    font-size: 14px;
+}
+
+table.p-datepicker-calendar thead th span {
+    font-size: 14px;
+}
+
+table.p-datepicker-calendar thead th {
+    text-align: center;
+}
+
+.p-datepicker .p-datepicker-header .p-datepicker-title .p-datepicker-year:enabled:hover, .p-datepicker .p-datepicker-header .p-datepicker-title .p-datepicker-month:enabled:hover {
+    color: #0b5ae5;
+}
+
+button.p-datepicker-month.p-link, button.p-datepicker-year.p-link {
+    font-size: 14px;
+}
+
+.p-datepicker .p-yearpicker .p-yearpicker-year.p-highlight,.p-datepicker .p-monthpicker .p-monthpicker-month.p-highlight {
+    color: #0b5ae5;
+    background: #e1ecff;
+    box-shadow: none;
+}
+
+.p-datepicker table td > span.p-highlight {
+    color: #fff;
+    background: #0b5ae5;
+}
+
+.p-radiobutton.p-highlight .p-radiobutton-box {
+    border-color: #0b5af1;
+    background: #0b5af1;
+}
+
+.p-radiobutton:not(.p-disabled):has(.p-radiobutton-input:hover) .p-radiobutton-box {
+    border-color: #0b5af1;
+}
+
+.side-navbar nav.nav.flex-column::-webkit-scrollbar {
+    height: 8px;
+    width: 5px;
+    background: transparent;
+}
+
+.side-navbar nav.nav.flex-column::-webkit-scrollbar-thumb {
+    background: #8a8a8a;
+    -webkit-border-radius: 1ex;
+    -webkit-box-shadow: 0px 1px 2px transparent;
+}
+
+.side-navbar nav.nav.flex-column::-webkit-scrollbar-corner {
+    background:transparent;
+}
+
+.p-multiselect-panel .p-multiselect-items .p-multiselect-item.p-highlight {
+    color: #111;
+    background: #f8fbff;
+    font-weight: 500;
+}
+
+.p-multiselect-panel .p-multiselect-items .p-multiselect-item.p-highlight.p-focus {
+    background: rgb(186 211 255);
+    color: #000000;
+}
+
+.p-multiselect-panel .p-multiselect-items .p-multiselect-item:not(.p-highlight):not(.p-disabled).p-focus {
+    background: rgb(186 211 255);
+    color: #000000; 
+}
+
+.statistic-inner {
+    padding: 20px;
+    box-shadow: 0px 8px 24px rgba(27, 46, 94, 0.12);
+    border: none;
+    background: radial-gradient(circle, rgb(27, 174, 174) 2%, rgb(26, 148, 148) 50%, rgb(4, 143, 143) 100%);
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.statistic-inner.color-red {
+    background: radial-gradient(circle, rgb(73 33 213) 2%, rgb(48 10 199) 50%, rgb(50 0 203) 100%);
+}
+
+.statistic-inner.color-red img {
+    transform: rotate(-15deg);
+    right: -20px;
+    top: 0px;
+}
+
+.statistic-inner.color-yellow img {
+    transform: rotate(-235deg);
+    right: -30px;
+    top: 0px;
+}
+
+.statistic-inner img {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 54%;
+}
+
+.statistic-inner span {
+    font-size: 16px;
+    margin-bottom: 10px;
+    display: inline-block;
+    width: 100%;
+    color: #ffffff;
+}
+
+.statistic-inner h4 {
+    font-size: 24px;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.statistic-inner small {
+    font-size: 12px;
+    color: #ffffffd1;
+    font-weight: 500;
+}
+
+.pie-chart.card canvas {
+    max-height: 270px;
+}
+
+ul.p-stepper-nav {
+    padding: 0;
+}
+
+.p-stepper .p-stepper-panels {
+    padding: 0;
+}
+
+
+.p-stepper button.btn.btn-primary {
+    margin-right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.p-stepper button.btn.btn-primary i.bi {
+    font-size: 15px;
+    margin-left: 10px;
+}
+
+
+.p-stepper button.btn.btn-primary i.bi.bi-arrow-left {
+    margin-right: 10px;
+    margin-left: 0;
+}
+
+.border-2.border-dashed {
+    border: none;
+    border-radius: 7px;
+    padding: 20px;
+    background: #f8f8f9;
+    min-height: 300px;
+}
+
+.p-stepper .p-stepper-header.p-highlight .p-stepper-number {
+    background: #0b5ae5;
+    color: #ffffff;
+    border: none;
+}
+
+.p-stepper .p-stepper-header:has(~ .p-highlight) .p-stepper-separator {
+    background-color: #0b5ae5;
+}
+
+.p-stepper .p-stepper-header .p-stepper-action .p-stepper-title {
+    margin-left: 0.5rem;
+    color: #212326;
+    font-weight: 500;
+    transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
+}
+
+.p-stepper .p-stepper-header.p-highlight .p-stepper-title {
+    color: #0b5ae5;
+    font-weight: 600;
+}
+
+.statistic-inner.color-yellow {
+    background: radial-gradient(circle, rgb(205 200 30) 2%, rgb(221 191 34) 50%, rgb(203 182 24) 100%);
+}
+
+.statistic-inner.color-green img {
+    right: -140px;
+    transform: rotate(165deg);
+    width: 70%;
+    top: -30px;
+}
+
+body .crmLeftMenu .side-navbar.expanded .nav-item.dropdown i.bi.bi-grid {
+    padding: 10px;
+    background: #0b5ae5;
+    border-radius: 7px;
+}
