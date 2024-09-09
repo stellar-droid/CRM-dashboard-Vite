@@ -479,7 +479,7 @@ const PricingModel = ({isLoading}) => {
           <Breadcrumb.Item active>Pricing List</Breadcrumb.Item>
         </Breadcrumb>
       </div>
-      <Card>
+      <Card className="crm-listing">
         <Card.Header>
           <div className="crm-filter-form">
             <Row>

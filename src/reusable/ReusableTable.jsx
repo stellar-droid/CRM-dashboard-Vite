@@ -269,6 +269,7 @@ const ReusableTable = ({tableData}) => {
             bootstrap4
             pagination={paginationFactory(paginationOptions)}
             id="table-to-export"
+            className="mt-0"
           />
       
     </>
