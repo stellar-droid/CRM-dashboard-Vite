@@ -58,6 +58,7 @@ form .form-label, form .form-check-label {
     border: none;
     color: #0b5ae5;
     font-weight: 500;
+    border-radius: 50px;
 }
 
 .tab-content {
@@ -170,9 +171,9 @@ li.p-multiselect-item {
 }
 
 .file-uploader span.p-button.p-component.p-fileupload-choose {
-    padding: 5px 10px;
+    padding: 5px 20px;
     font-size: 12px;
-    border-radius: 4px;
+    border-radius: 34px;
     border: none;
     font-weight: 400;
     background: #0b5ae5;
@@ -271,7 +272,7 @@ button.p-datepicker-month.p-link, button.p-datepicker-year.p-link {
 }
 
 .statistic-inner {
-    padding: 20px;
+    padding: 20px 25px;
     box-shadow: 0px 8px 24px rgba(27, 46, 94, 0.12);
     border: none;
     background: radial-gradient(circle, rgb(27, 174, 174) 2%, rgb(26, 148, 148) 50%, rgb(4, 143, 143) 100%);
@@ -285,7 +286,7 @@ button.p-datepicker-month.p-link, button.p-datepicker-year.p-link {
 }
 
 .statistic-inner.color-red img {
-    transform: rotate(-15deg);
+    transform: rotate(-18deg);
     right: -20px;
     top: 0px;
 }
@@ -300,7 +301,7 @@ button.p-datepicker-month.p-link, button.p-datepicker-year.p-link {
     position: absolute;
     right: 0;
     top: 0;
-    width: 54%;
+    width: 46%;
 }
 
 .statistic-inner span {
@@ -312,7 +313,7 @@ button.p-datepicker-month.p-link, button.p-datepicker-year.p-link {
 }
 
 .statistic-inner h4 {
-    font-size: 24px;
+    font-size: 28px;
     margin-bottom: 5px;
     font-weight: 600;
     color: #ffffff;
@@ -391,14 +392,35 @@ ul.p-stepper-nav {
 }
 
 .statistic-inner.color-green img {
-    right: -140px;
-    transform: rotate(165deg);
-    width: 70%;
-    top: -30px;
+    right: -149px;
+    transform: rotate(143deg);
+    width: 78%;
+    top: -36px;
 }
 
 body .crmLeftMenu .side-navbar.expanded .nav-item.dropdown i.bi.bi-grid {
     padding: 10px;
     background: #0b5ae5;
-    border-radius: 7px;
+    border-radius: 37px;
+}
+
+@media (max-width:1650px){
+    .statistic-inner.color-green img {
+        right: -119px;
+        transform: rotate(153deg);
+        width: 78%;
+        top: -16px;
+    }
+    .statistic-inner.color-red img {
+        transform: rotate(-25deg);
+        right: -30px;
+        top: 30px;
+        width: 50%;
+    }
+    .statistic-inner.color-yellow img {
+        transform: rotate(-241deg);
+        right: -30px;
+        top: 20px;
+        width: 50%;
+    }
 }

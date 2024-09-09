@@ -23,6 +23,8 @@ import { Routes, Route, Outlet } from "react-router-dom";
 import Dashboard from "./Dashboard";
 import { useNavigate } from "react-router-dom";
 import { BarChart } from "react-feather";
+import Dropdown from "react-bootstrap/Dropdown";
+import BarChart2 from "../../assets/images/BarChart2.svg";
 
 const Index = () => {
 
@@ -75,28 +77,41 @@ const handleLogoClick = () => {
                 </Row>
               </Form>
               <Navbar.Collapse id="basic-navbar-nav">
-                <Nav className="ms-auto">
-                  <NavDropdown
-                    title={
-                      <>
-                        <img src={User} alt="Crm-logo" />{" "}
-                        <h2>
-                          Aniket Sanap<span>Administrator </span>
-                        </h2>{" "}
-                        <i className="bi bi-chevron-down"></i>
-                      </>
-                    }
-                  >
-                    <NavDropdown.Item href="#action/3.1">
-                      <i className="bi bi-person"></i> View Profile
-                    </NavDropdown.Item>
-                    <NavDropdown.Item href="#action/3.2">
-                      <i className="bi bi-key"></i> Change Password
-                    </NavDropdown.Item>
-                    <NavDropdown.Item className='crm-delete' href="#action/3.3">
-                      <i className="bi bi-box-arrow-left"></i> Logout
-                    </NavDropdown.Item>
-                  </NavDropdown>
+                <Nav className="ms-auto notification-icon">
+
+                  <Dropdown>
+                    <Dropdown.Toggle variant="success" id="dropdown-basic">
+                      <i class="bi bi-bell"></i><span>5</span>
+                    </Dropdown.Toggle>
+
+                    <Dropdown.Menu>
+                      <div className="notification-card-header">
+                        <h4>Notifications</h4>
+                        <ul>
+                          <li>
+                            <div className="notification-img">
+                              <img src={BarChart2} alt="Crm-logo" />
+                            </div>
+                            <div className="notification-text">
+                              <h4>Keefe Bond added new tags to Design</h4>
+                              <p>Lorem Ipsum has been the industry's standard dum</p>
+                              <small>2 min ago</small>
+                            </div>
+                          </li>
+                          <li>
+                            <div className="notification-img">
+                              <img src={BarChart2} alt="Crm-logo" />
+                            </div>
+                            <div className="notification-text">
+                              <h4>Keefe Bond added new tags to Design</h4>
+                              <p>Lorem Ipsum has been the industry's standard dum</p>
+                              <small>2 min ago</small>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                    </Dropdown.Menu>
+                  </Dropdown>
                 </Nav>
               </Navbar.Collapse>
             </Container>
