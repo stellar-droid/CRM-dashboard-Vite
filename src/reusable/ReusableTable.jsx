@@ -261,8 +261,7 @@ const ReusableTable = ({tableData}) => {
   ];
   return (
     <>
-      <Card>
-        <Card.Body>
+      
           <BootstrapTable
             keyField="id"
             data={tableData}
@@ -271,8 +270,7 @@ const ReusableTable = ({tableData}) => {
             pagination={paginationFactory(paginationOptions)}
             id="table-to-export"
           />
-        </Card.Body>
-      </Card>
+      
     </>
   );
 };
