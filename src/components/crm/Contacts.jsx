@@ -241,6 +241,7 @@ const Contacts = () => {
 
         <Card.Body>
           <ReusableTable tableData={data}/>
+          
         </Card.Body>
       </Card>
 
