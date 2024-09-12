@@ -1,3 +1,8 @@
+// copyright : ESDS Software Solution Ltd. All Rights Reserved
+// author : Lokesh Wani
+// version : 4.0
+// maintainer : Lokesh Wani,Aniket Sanap
+
 import React, { useState } from "react";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
 import Card from "react-bootstrap/Card";
@@ -109,12 +114,9 @@ const Contacts = () => {
   ];
   const [data, setData] = useState(initialData);
   const [showAdd, setShowAdd] = useState(false);
-  const [showModal, setShowModal] = useState(false);
-  const [isActive, setIsActive] = useState(false);
-  const [showDelete, setShowDelete] = useState(false);
-  const [isDelete, setIsDelete] = useState(false);
+
   
-  const addFormProps={
+  const contactAddFormProps={
     title:"Title",
     fisrtName:"First Name",
     middleName:"Middle Name",
@@ -128,58 +130,18 @@ const Contacts = () => {
     secondaryPhoneNo:"Secondary Phone No",
     alternatePhoneNo:"Alternate Phone No",
     checkBox:true,
-    checkBoxLabel1:"Don't Solicit",
-    checkBoxLabel2:"Don't Email",
-    checkBoxLabel3:"Don't Call",
-    checkBoxLabel4:"Don't Fax",
-    checkBoxLabel5:"Don't SMS",
+    checkBoxSolicit:"Don't Solicit",
+    checkBoxEmail:"Don't Email",
+    checkBoxCall:"Don't Call",
+    checkBoxFax:"Don't Fax",
+    checkBoxSms:"Don't SMS",
   };
   const handleShowAdd = () => setShowAdd(true);
   const handleCloseAdd = () => setShowAdd(false);
 
  
 
-  const handleConfirm = () => {
-    if (rowIdToUpdate !== null) {
-      const updatedData = data.map((item, i) =>
-        item.id === rowIdToUpdate ? { ...item, isActive: !item.isActive } : item
-      );
-      setData(updatedData);
-      setRowIdToUpdate(null);
-      setShowModal(false);
-    }
-  };
-
-  const handleCancel = () => {
-    setRowIdToUpdate(null);
-    setShowModal(false);
-  };
-  const statusModal = () => {
-    console.log("Status Modal");
-    return (
-      <div>
-        <ConfirmationModal
-          show={showModal}
-          onConfirm={handleConfirm}
-          onCancel={handleCancel}
-          isActiveStatus={isActive}
-        />
-      </div>
-    );
-  };
-
-  const deleteModal = () => {
-    console.log("Delete Modal");
-    return (
-      <div>
-        <ConfirmationModal
-          show={showDelete}
-          setIsDelete={setIsDelete}
-          isDelete={isDelete}
-        />
-      </div>
-    );
-  };
+  
   return (
     <>
       <div className="crm-header">
@@ -240,7 +202,7 @@ const Contacts = () => {
         </Card.Header>
 
         <Card.Body>
-          <ReusableTable tableData={data}/>
+          <ReusableTable tableData={data} setData={setData}/>
         </Card.Body>
       </Card>
 
@@ -256,11 +218,10 @@ const Contacts = () => {
         </Offcanvas.Header>
 
         <Offcanvas.Body>
-          <CommonForm addFormProps={addFormProps} />
+          <CommonForm contactAddFormProps={contactAddFormProps} />
         </Offcanvas.Body>
       </Offcanvas>
-      {statusModal()}
-      {deleteModal()}
+     
     </>
   );
 };

@@ -86,6 +86,7 @@ const PricingModel = ({isLoading}) => {
   const handleCancel = () => {
     setRowIdToUpdate(null);
     setShowModal(false);
+    {showDelete&&setShowDelete(false)}
   };
   const handleView = (id) => {
     // Handle view action
@@ -125,6 +126,8 @@ const PricingModel = ({isLoading}) => {
           show={showDelete}
           setIsDelete={setIsDelete}
           isDelete={isDelete}
+          onCancel={handleCancel}
+
         />
       </div>
     );

@@ -230,7 +230,7 @@ const Settings = () => {
                 </div>
               </div>
               <div className="d-flex pt-4 justify-content-end">
-                <Button label="Next" icon="pi pi-arrow-right" iconPos="right" onClick={() => stepperRef.current.nextCallback()}> Next <i class="bi bi-arrow-right"></i></Button>
+                <Button label="Next" icon="pi pi-arrow-right" iconPos="right" onClick={() => stepperRef.current.nextCallback()}> Next <i className="bi bi-arrow-right"></i></Button>
               </div>
             </StepperPanel>
             <StepperPanel header="Header II">
@@ -251,8 +251,8 @@ const Settings = () => {
                 </div>
               </div>
               <div className="d-flex pt-4 justify-content-between">
-                <Button label="Back" severity="secondary" icon="pi pi-arrow-left" onClick={() => stepperRef.current.prevCallback()}><i class="bi bi-arrow-left"></i> Prev </Button>
-                <Button label="Next" icon="pi pi-arrow-right" iconPos="right" onClick={() => stepperRef.current.nextCallback()} > Next <i class="bi bi-arrow-right"></i></Button>
+                <Button label="Back" severity="secondary" icon="pi pi-arrow-left" onClick={() => stepperRef.current.prevCallback()}><i className="bi bi-arrow-left"></i> Prev </Button>
+                <Button label="Next" icon="pi pi-arrow-right" iconPos="right" onClick={() => stepperRef.current.nextCallback()} > Next <i className="bi bi-arrow-right"></i></Button>
               </div>
             </StepperPanel>
             <StepperPanel header="Header III">
@@ -289,7 +289,7 @@ const Settings = () => {
                 </div>
               </div>
               <div className="d-flex pt-4 justify-content-start">
-                <Button label="Back" severity="secondary" icon="pi pi-arrow-left" onClick={() => stepperRef.current.prevCallback()}><i class="bi bi-arrow-left"></i> Prev </Button>
+                <Button label="Back" severity="secondary" icon="pi pi-arrow-left" onClick={() => stepperRef.current.prevCallback()}><i className="bi bi-arrow-left"></i> Prev </Button>
               </div>
             </StepperPanel>
           </Stepper>

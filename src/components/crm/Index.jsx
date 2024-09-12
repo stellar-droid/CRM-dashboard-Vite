@@ -81,7 +81,7 @@ const handleLogoClick = () => {
 
                   <Dropdown>
                     <Dropdown.Toggle variant="success" id="dropdown-basic">
-                      <i class="bi bi-bell"></i><span>5</span>
+                      <i className="bi bi-bell"></i><span>5</span>
                     </Dropdown.Toggle>
 
                     <Dropdown.Menu>

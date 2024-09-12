@@ -1,3 +1,8 @@
+// copyright : ESDS Software Solution Ltd. All Rights Reserved
+// author : Lokesh Wani
+// version : 4.0
+// maintainer : Lokesh Wani,Aniket Sanap
+
 import React, { useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
@@ -7,7 +12,7 @@ import AfterConfirmationModal from "./AfterConfirmationModal";
 
 const ConfirmationModal = ({
   setIsDelete,
-  IsDelete,
+  isDelete,
   show,
   setShow,
   onConfirm,
@@ -34,13 +39,17 @@ const ConfirmationModal = ({
       </div>
     );
   };
+
+  useEffect(() => {
+    console.log("Check is delete prop",isDelete)
+  }, [isDelete]);
   return (
     <>
       <Modal show={show} onHide={onCancel} centered>
         <Modal.Header closeButton></Modal.Header>
         <Modal.Body className="crm-warning-popup">
           <img className="crm-img-close" src={Info} alt="Crm-logo" />
-          {IsDelete ? (
+          {isDelete ? (
             <p className="mt-4">
               Are you sure you want to delete this record ?
             </p>

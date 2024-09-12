@@ -1,3 +1,8 @@
+// copyright : ESDS Software Solution Ltd. All Rights Reserved
+// author : Lokesh Wani
+// version : 4.0
+// maintainer : Lokesh Wani,
+
 import React from 'react';
 
 class ErrorBoundary extends React.Component {

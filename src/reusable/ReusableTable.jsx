@@ -1,3 +1,8 @@
+// copyright : ESDS Software Solution Ltd. All Rights Reserved
+// author : Lokesh Wani
+// version : 4.0
+// maintainer : Lokesh Wani,Aniket Sanap
+
 import React from "react";
 import { Card } from "react-bootstrap";
 import BootstrapTable from "react-bootstrap-table-next";
@@ -7,8 +12,13 @@ import Switch from "react-bootstrap/Switch";
 import { Dropdown } from "react-bootstrap";
 // import { sortDirections, paginationOptions } from "../utils/constants";
 import { jsPDF } from "jspdf";
+import ConfirmationModal from "./ConfirmationModal";
+import { Offcanvas } from "react-bootstrap";
+import CommonForm from "./CommonForm";
 
-const ReusableTable = ({tableData}) => {
+
+const ReusableTable = ({ tableData,setData }) => {
+ 
   const [showModal, setShowModal] = useState(false);
   const [rowIdToUpdate, setRowIdToUpdate] = useState("");
   const [isActive, setIsActive] = useState(false);
@@ -16,7 +26,6 @@ const ReusableTable = ({tableData}) => {
   const [showEdit, setShowEdit] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
   const [isDelete, setIsDelete] = useState(false);
-
   const [sortDirections, setSortDirections] = useState({
     srNo: "asc",
     productName: "asc",
@@ -31,23 +40,53 @@ const ReusableTable = ({tableData}) => {
     isActive: "asc",
   });
 
- 
-  const handleToggleChange = (rowId, row) => {
-    setRowIdToUpdate(rowId);
-    setShowModal(true);
-    setIsActive(row.isActive);
-  };
   const handleClick = (headerName) => {
     setSortDirections((prevState) => ({
       ...prevState,
       [headerName]: prevState[headerName] === "asc" ? "desc" : "asc",
     }));
   };
+  const handleConfirm = () => {
+    if (rowIdToUpdate !== null) {
+      const updatedData = tableData.map((item, i) =>
+        item.id === rowIdToUpdate ? { ...item, isActive: !item.isActive } : item
+      );
+      setData(updatedData);
+      setRowIdToUpdate(null);
+      setShowModal(false);
+    }
+  };
+  const handleCancel = () => {
+    setRowIdToUpdate(null);
+    setShowModal(false);
+    {showDelete&&setShowDelete(false)}
+  };
+  const statusModal = () => {
+    console.log("Status Modal");
+    return (
+      <div>
+        <ConfirmationModal
+          show={showModal}
+          onConfirm={handleConfirm}
+          onCancel={handleCancel}
+          isActiveStatus={isActive}
+        />
+      </div>
+    );
+  };
+  const handleToggleChange = (rowId, row) => {
+    setRowIdToUpdate(rowId);
+    setShowModal(true);
+    setIsActive(row.isActive);
+    console.log("Row ID to update", rowId);
+  };
 
   const handleShowView = () => setShowView(true);
   const handleCloseEdit = () => setShowEdit(false);
   const handleShowEdit = () => setShowEdit(true);
-
+  const handleCloseView = () => {
+    showView ? setShowView(false) : setShowEdit(false);
+  };
   const handleView = (id) => {
     // Handle view action
     handleShowView();
@@ -63,6 +102,21 @@ const ReusableTable = ({tableData}) => {
     console.log("Delete item with id", id);
     setShowDelete(true);
     setIsDelete(true);
+  };
+
+  const deleteModal = () => {
+    console.log("Delete Modal");
+    return (
+      <div>
+        <ConfirmationModal
+          show={showDelete}
+          setIsDelete={setIsDelete}
+          isDelete={isDelete}
+          onCancel={handleCancel}
+
+        />
+      </div>
+    );
   };
 
   const paginationOptions = {
@@ -85,24 +139,40 @@ const ReusableTable = ({tableData}) => {
 
   const handleExportPDF = (rowData) => {
     const doc = new jsPDF();
-  
+
     doc.setFontSize(18);
-    doc.text('Pricing Details', 10, 10);
-  
+    doc.text("Pricing Details", 10, 10);
+
     doc.setFontSize(12);
     doc.text(`S.No: ${rowData.srNo}`, 10, 20);
     doc.text(`Product Name: ${rowData.productName}`, 10, 30);
     doc.text(`Price Level: ${rowData.priceLevel}`, 10, 40);
     doc.text(`Price List: ${rowData.priceList}`, 10, 50);
-    doc.text(`Purchase Cost (One Time): ${rowData.purchaseCostOneTime}`, 10, 60);
-    doc.text(`Purchase Cost (Recurring): ${rowData.purchaseCostRecurring}`, 10, 70);
-    doc.text(`Selling Price (One Time): ${rowData.sellingPriceOneTime}`, 10, 80);
-    doc.text(`Selling Price (Recurring): ${rowData.sellingPriceRecurring}`, 10, 90);
+    doc.text(
+      `Purchase Cost (One Time): ${rowData.purchaseCostOneTime}`,
+      10,
+      60
+    );
+    doc.text(
+      `Purchase Cost (Recurring): ${rowData.purchaseCostRecurring}`,
+      10,
+      70
+    );
+    doc.text(
+      `Selling Price (One Time): ${rowData.sellingPriceOneTime}`,
+      10,
+      80
+    );
+    doc.text(
+      `Selling Price (Recurring): ${rowData.sellingPriceRecurring}`,
+      10,
+      90
+    );
     doc.text(`Expiry Date: ${rowData.expiryDate}`, 10, 100);
-    doc.text(`Is Approved: ${rowData.isApproved ? 'Yes' : 'No'}`, 10, 110);
-    doc.text(`Is Active: ${rowData.isActive ? 'Yes' : 'No'}`, 10, 120);
-  
-    doc.save('row-data.pdf');
+    doc.text(`Is Approved: ${rowData.isApproved ? "Yes" : "No"}`, 10, 110);
+    doc.text(`Is Active: ${rowData.isActive ? "Yes" : "No"}`, 10, 120);
+
+    doc.save("row-data.pdf");
   };
 
   const columns = [
@@ -140,7 +210,9 @@ const ReusableTable = ({tableData}) => {
       sort: true,
       headerClasses: `sortable-header-primaryPhoneNo ${sortDirections.primaryPhoneNo}`,
       headerFormatter: (column, colIndex) => (
-        <span onClick={() => handleClick("primaryPhoneNo")}>Primary Phone No.</span>
+        <span onClick={() => handleClick("primaryPhoneNo")}>
+          Primary Phone No.
+        </span>
       ),
     },
     {
@@ -150,7 +222,7 @@ const ReusableTable = ({tableData}) => {
       headerClasses: `sortable-header-secondaryPhoneNo ${sortDirections.secondaryPhoneNo}`,
       headerFormatter: (column, colIndex) => (
         <span onClick={() => handleClick("secondaryPhoneNo")}>
-         Secondary Phone No.
+          Secondary Phone No.
         </span>
       ),
     },
@@ -171,9 +243,7 @@ const ReusableTable = ({tableData}) => {
       sort: true,
       headerClasses: `sortable-header-email ${sortDirections.email}`,
       headerFormatter: (column, colIndex) => (
-        <span onClick={() => handleClick("email")}>
-         Email
-        </span>
+        <span onClick={() => handleClick("email")}>Email</span>
       ),
     },
     {
@@ -182,9 +252,7 @@ const ReusableTable = ({tableData}) => {
       sort: true,
       headerClasses: `sortable-header-leadCode ${sortDirections.leadCode}`,
       headerFormatter: (column, colIndex) => (
-        <span onClick={() => handleClick("leadCode")}>
-          Lead Code
-        </span>
+        <span onClick={() => handleClick("leadCode")}>Lead Code</span>
       ),
     },
     {
@@ -205,29 +273,13 @@ const ReusableTable = ({tableData}) => {
         <span onClick={() => handleClick("isActive")}>Is Active</span>
       ),
       formatter: (cell, row) => (
-            <Switch
-              size="small"
-              checked={row.isActive}
-              onChange={() => handleToggleChange(row.id, row)}
-            />
-          ),
+        <Switch
+          size="small"
+          checked={row.isActive}
+          onChange={() => handleToggleChange(row.id, row)}
+        />
+      ),
     },
-    // {
-    //   dataField: "isActive",
-    //   text: "Is Active",
-    //   sort: true,
-    //   headerClasses: `sortable-header-isActive ${sortDirections.isActive}`,
-    //   headerFormatter: (column, colIndex) => (
-    //     <span onClick={() => handleClick("isActive")}>Is Active</span>
-    //   ),
-    //   formatter: (cell, row) => (
-    //     <Switch
-    //       size="small"
-    //       checked={row.isActive}
-    //       onChange={() => handleToggleChange(row.id, row)}
-    //     />
-    //   ),
-    // },
     {
       dataField: "action",
       text: "Action",
@@ -261,17 +313,39 @@ const ReusableTable = ({tableData}) => {
   ];
   return (
     <>
-      
-          <BootstrapTable
-            keyField="id"
-            data={tableData}
-            columns={columns}
-            bootstrap4
-            pagination={paginationFactory(paginationOptions)}
-            id="table-to-export"
-            className="mt-0"
-          />
-      
+      <BootstrapTable
+        keyField="id"
+        data={tableData}
+        columns={columns}
+        bootstrap4
+        pagination={paginationFactory(paginationOptions)}
+        id="table-to-export"
+      />
+      {statusModal()}
+      {deleteModal()}
+
+
+      {/* VIEW FORM */}
+      <Offcanvas
+        className="crm-right-form"
+        show={showView || showEdit}
+        onHide={handleCloseView}
+        placement="end"
+      >
+        <Offcanvas.Header closeButton>
+          {showView ? (
+            <Offcanvas.Title>View Pricing Master</Offcanvas.Title>
+          ) : showEdit ? (
+            <Offcanvas.Title>Edit Pricing Master</Offcanvas.Title>
+          ) : (
+            ""
+          )}
+        </Offcanvas.Header>
+
+        <Offcanvas.Body>
+          <CommonForm viewOnly={showView} />
+        </Offcanvas.Body>
+      </Offcanvas>
     </>
   );
 };
