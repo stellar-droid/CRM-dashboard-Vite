@@ -21,6 +21,7 @@ import Col from "react-bootstrap/Col";
 import { Row } from "react-bootstrap";
 import { Stepper } from 'primereact/stepper';
 import { StepperPanel } from 'primereact/stepperpanel';
+import { AutoComplete } from 'primereact/autocomplete';
 
 const Settings = () => {
   const toast = useRef(null);
@@ -29,6 +30,13 @@ const Settings = () => {
   const [text, setText] = useState("");
   const [selectedCities, setSelectedCities] = useState(null);
   const [ingredient, setIngredient] = useState('');
+  const [value, setValue] = useState('');
+  const [items, setItems] = useState([]);
+
+  const search = (event) => {
+    setItems([...Array(10).keys()].map(item => event.query + '-' + item));
+}
+
   const cities = [
     { name: "New York", code: "NY" },
     { name: "Rome", code: "RM" },
@@ -101,6 +109,7 @@ const Settings = () => {
                   className="w-full md:w-20rem"
                 />
               </Form.Group>
+
 
 
 
@@ -320,6 +329,140 @@ const Settings = () => {
 
             </Tabs>
 
+          </div>
+        </Card.Body>
+      </Card>
+
+      {/* ====================Add More Form here===================== */}
+      <Card className="mt-3">
+        <Card.Header>
+          Add More Form
+        </Card.Header>
+        <Card.Body>
+          <div className="address-block">
+            <Form>
+              <Row>
+                <Col xl="6">
+                  <Row className="adress-inner-block">
+                    <Form.Group className="form-group mb-2 col-4" controlId="formGroupText">
+                      <Form.Label>Address Type</Form.Label>
+                      <Form.Select aria-label="Default select example">
+                        <option>Select</option>
+                        <option value="1">Shipping</option>
+                        <option value="2">Billing</option>
+                      </Form.Select>
+                    </Form.Group>
+
+                    <Form.Group className="mb-3 col-8" controlId="formBasicEmail">
+                      <Form.Label>Address</Form.Label>
+                      <Form.Control type="text" placeholder="Enter Address" />
+                    </Form.Group>
+
+
+                    <Form.Group className="form-group mb-2 col-3" controlId="formGroupText">
+                      <Form.Label>Country</Form.Label>
+                      <Form.Select aria-label="Default select example">
+                        <option>Select</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                      </Form.Select>
+                    </Form.Group>
+
+                    <Form.Group className="form-group mb-2 col-3" controlId="formGroupText">
+                      <Form.Label>State</Form.Label>
+                      <Form.Select aria-label="Default select example">
+                        <option>Select</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                      </Form.Select>
+                    </Form.Group>
+
+                    <Form.Group className="form-group mb-2 col-3" controlId="formGroupText">
+                      <Form.Label>City</Form.Label>
+                      <Form.Select aria-label="Default select example">
+                        <option>Select</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                      </Form.Select>
+                    </Form.Group>
+
+
+                    <Form.Group className="mb-3 col-3" controlId="formBasicPassword">
+                      <Form.Label>Zip Code</Form.Label>
+                      <Form.Control type="text" placeholder="Enter Zip Code" />
+                    </Form.Group>
+
+                  </Row>
+                </Col>
+                <Col xl="6">
+                  <Row className="adress-inner-block">
+                    <Form.Group className="form-group mb-2 col-4" controlId="formGroupText">
+                      <Form.Label>Address Type</Form.Label>
+                      <Form.Select aria-label="Default select example">
+                        <option>Select</option>
+                        <option value="1">Shipping</option>
+                        <option value="2">Billing</option>
+                      </Form.Select>
+                    </Form.Group>
+
+                    <Form.Group className="mb-3 col-8" controlId="formBasicEmail">
+                      <Form.Label>Address</Form.Label>
+                      <Form.Control type="text" placeholder="Enter Address" />
+                    </Form.Group>
+
+
+                    <Form.Group className="form-group mb-2 col-3" controlId="formGroupText">
+                      <Form.Label>Country</Form.Label>
+                      <Form.Select aria-label="Default select example">
+                        <option>Select</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                      </Form.Select>
+                    </Form.Group>
+
+                    <Form.Group className="form-group mb-2 col-3" controlId="formGroupText">
+                      <Form.Label>State</Form.Label>
+                      <Form.Select aria-label="Default select example">
+                        <option>Select</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                      </Form.Select>
+                    </Form.Group>
+
+                    <Form.Group className="form-group mb-2 col-3" controlId="formGroupText">
+                      <Form.Label>City</Form.Label>
+                      <Form.Select aria-label="Default select example">
+                        <option>Select</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                      </Form.Select>
+                    </Form.Group>
+
+
+                    <Form.Group className="mb-3 col-3" controlId="formBasicPassword">
+                      <Form.Label>Zip Code</Form.Label>
+                      <Form.Control type="text" placeholder="Enter Zip Code" />
+                    </Form.Group>
+                    <Col xl="12">
+                      <Button variant="primary" type="submit" className="delete-btn">
+                        <i class="bi bi-trash"></i>
+                      </Button>
+                    </Col>
+                  </Row>
+                </Col>
+                <Col xl="12" className="mt-3">
+                  <Button variant="primary" type="submit" className="search-btn">
+                    Add More <i class="bi bi-plus"></i>
+                  </Button>
+                </Col>
+              </Row>
+            </Form>
           </div>
         </Card.Body>
       </Card>

@@ -410,6 +410,38 @@ body .crmLeftMenu .side-navbar.expanded .nav-item.dropdown i.bi.bi-grid {
     border-radius: 37px;
 }
 
+.adress-inner-block.row {
+    border: none;
+    border-radius: 7px;
+    padding: 0;
+    background: #f8f8f9;
+    padding-top: 10px;
+    margin: 0;
+    position: relative;
+}
+
+button.search-btn.btn.btn-primary i.bi.bi-plus {
+    font-size: 20px;
+    margin-left: 6px;
+}
+
+button.delete-btn.btn.btn-primary {
+    width: 35px;
+    height: 35px;
+    font-size: 14px;
+    padding: 0;
+    background: #ff0021e0;
+    position: absolute;
+    right: -6px;
+    top: -10px;
+    border: none;
+    color: #fff;
+}
+
+form .form-control:focus, form .form-control:active, form .form-select:focus, form .form-select:active {
+    border-color: #0d6efd !important;
+}
+
 @media (max-width:1650px){
     .statistic-inner.color-green img {
         right: -119px;
