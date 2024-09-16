@@ -351,7 +351,8 @@ nav.nav.flex-column .submenu a.nav-link {
 }
 
 .side-navbar.expanded nav.nav.flex-column .submenu a.nav-link {
-  padding: 5px 15px;
+  padding: 8px 15px;
+  font-size: 12px !important;
 }
 
 .side-navbar.expanded nav.nav.flex-column .submenu a.nav-link:last-child {
