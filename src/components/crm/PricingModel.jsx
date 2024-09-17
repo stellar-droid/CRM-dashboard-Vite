@@ -590,21 +590,6 @@ const PricingModel = ({isLoading}) => {
         </Offcanvas.Body>
       </Offcanvas>
 
-      {/* EDIT FORM
-      <Offcanvas
-        className="crm-right-form"
-        show={showEdit}
-        onHide={handleCloseEdit}
-        placement="end"
-      >
-        <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Edit Pricing Master</Offcanvas.Title>
-        </Offcanvas.Header>
-
-        <Offcanvas.Body>
-          <CommonForm />
-        </Offcanvas.Body>
-      </Offcanvas> */}
       {statusModal()}
       {deleteModal()}
     </>

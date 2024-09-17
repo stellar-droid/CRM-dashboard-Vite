@@ -22,6 +22,7 @@ import { Row } from "react-bootstrap";
 import { Stepper } from 'primereact/stepper';
 import { StepperPanel } from 'primereact/stepperpanel';
 import { AutoComplete } from 'primereact/autocomplete';
+import Designations from "./Master_Module/User_Management/Designations";
 
 const Settings = () => {
   const toast = useRef(null);
@@ -466,6 +467,10 @@ const Settings = () => {
           </div>
         </Card.Body>
       </Card>
+
+
+      {/* DESIGNATIONS CODE TESTING  */}
+      <Designations />
     </>
   );
 };
