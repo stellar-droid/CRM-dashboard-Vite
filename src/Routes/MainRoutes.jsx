@@ -13,6 +13,7 @@ import Dashboard from "../components/crm/Dashboard";
 import Leads from "../components/crm/Leads";
 import Contacts from "../components/crm/Contacts";
 import Companies from "../components/crm/Companies";
+import Designations from "../components/crm/Master_Module/User_Management/Designations";
 
 const MainRoutes = () => {
   return (
@@ -25,6 +26,7 @@ const MainRoutes = () => {
         <Route path="/companies" element={<Companies />} />
         <Route path="/leads" element={<Leads />} />
         <Route path="/settings" element={<Settings />} />
+        <Route path="/designation" element={<Designations />} />
       </Route>
 
       <Route path="/login" element={<Login />} />

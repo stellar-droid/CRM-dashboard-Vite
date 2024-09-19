@@ -371,7 +371,7 @@ const SideNavbar = ({ onToggleSidebar, setIsNavHovered }) => {
                     activeMenus[8] === "userManagement" ? "show" : ""
                   }`}
                 >
-                  <Link className="nav-link" to="/projects/members/team">
+                  <Link className="nav-link" to="/designation">
                     Designations
                   </Link>
                   <Link className="nav-link" to="/projects/members/team">

@@ -12,7 +12,7 @@ import Select from "react-select";
 import Flatpickr from "react-flatpickr";
 import { Checkbox } from "primereact/checkbox";
 import { Card } from "react-bootstrap";
-import { Formik,  Field, ErrorMessage } from "formik";
+import { Formik, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
 const CommonForm = ({ viewOnly, contactAddFormProps }) => {
@@ -182,13 +182,21 @@ const CommonForm = ({ viewOnly, contactAddFormProps }) => {
                           : ""}
                       </Form.Label>
                       <Form.Control
-                         name="firstName"
-                         type="text"
-                         placeholder="First Name"
-                         className={`form-control ${errors.firstName && touched.firstName ? 'is-invalid' : ''}`}
-                         disabled={viewOnly}
+                        name="firstName"
+                        type="text"
+                        placeholder="First Name"
+                        className={`form-control ${
+                          errors.firstName && touched.firstName
+                            ? "is-invalid"
+                            : ""
+                        }`}
+                        disabled={viewOnly}
                       />
-                       <ErrorMessage name="firstName" component="div" className="invalid-feedback" />
+                      <ErrorMessage
+                        name="firstName"
+                        component="div"
+                        className="invalid-feedback"
+                      />
                     </Form.Group>
                   </Col>
 
@@ -506,130 +514,132 @@ const CommonForm = ({ viewOnly, contactAddFormProps }) => {
                             </Col>
                           </Row>
                         </Col> */}
-                            {addressBlocks.map((block, index) => (
-                              <Col xl="12" key={block.id}>
-                                <Row className="adress-inner-block">
-                                  <Form.Group className="form-group mb-2 col-4">
-                                    <Form.Label>Address Type</Form.Label>
-                                    <Form.Select
-                                      value={block.addressType}
-                                      onChange={(e) =>
-                                        handleInputChange(
-                                          block.id,
-                                          "addressType",
-                                          e.target.value
-                                        )
-                                      }
-                                    >
-                                      <option>Select</option>
-                                      <option value="1">Shipping</option>
-                                      <option value="2">Billing</option>
-                                    </Form.Select>
-                                  </Form.Group>
+                            <Col xl="12" >
+                              {addressBlocks.map((block, index) => (
+                                <>
+                                  <Row key={block.id} className="adress-inner-block">
+                                    <Form.Group className="form-group mb-2 col-4">
+                                      <Form.Label>Address Type</Form.Label>
+                                      <Form.Select
+                                        value={block.addressType}
+                                        onChange={(e) =>
+                                          handleInputChange(
+                                            block.id,
+                                            "addressType",
+                                            e.target.value
+                                          )
+                                        }
+                                      >
+                                        <option>Select</option>
+                                        <option value="1">Shipping</option>
+                                        <option value="2">Billing</option>
+                                      </Form.Select>
+                                    </Form.Group>
 
-                                  <Form.Group className="mb-3 col-8">
-                                    <Form.Label>Address</Form.Label>
-                                    <Form.Control
-                                      type="text"
-                                      placeholder="Enter Address"
-                                      value={block.address}
-                                      onChange={(e) =>
-                                        handleInputChange(
-                                          block.id,
-                                          "address",
-                                          e.target.value
-                                        )
-                                      }
-                                    />
-                                  </Form.Group>
+                                    <Form.Group className="mb-3 col-8">
+                                      <Form.Label>Address</Form.Label>
+                                      <Form.Control
+                                        type="text"
+                                        placeholder="Enter Address"
+                                        value={block.address}
+                                        onChange={(e) =>
+                                          handleInputChange(
+                                            block.id,
+                                            "address",
+                                            e.target.value
+                                          )
+                                        }
+                                      />
+                                    </Form.Group>
 
-                                  <Form.Group className="form-group mb-2 col-3">
-                                    <Form.Label>Country</Form.Label>
-                                    <Form.Select
-                                      value={block.country}
-                                      onChange={(e) =>
-                                        handleInputChange(
-                                          block.id,
-                                          "country",
-                                          e.target.value
-                                        )
-                                      }
-                                    >
-                                      <option>Select</option>
-                                      <option value="1">One</option>
-                                      <option value="2">Two</option>
-                                      <option value="3">Three</option>
-                                    </Form.Select>
-                                  </Form.Group>
+                                    <Form.Group className="form-group mb-2 col-3">
+                                      <Form.Label>Country</Form.Label>
+                                      <Form.Select
+                                        value={block.country}
+                                        onChange={(e) =>
+                                          handleInputChange(
+                                            block.id,
+                                            "country",
+                                            e.target.value
+                                          )
+                                        }
+                                      >
+                                        <option>Select</option>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                      </Form.Select>
+                                    </Form.Group>
 
-                                  <Form.Group className="form-group mb-2 col-3">
-                                    <Form.Label>State</Form.Label>
-                                    <Form.Select
-                                      value={block.state}
-                                      onChange={(e) =>
-                                        handleInputChange(
-                                          block.id,
-                                          "state",
-                                          e.target.value
-                                        )
-                                      }
-                                    >
-                                      <option>Select</option>
-                                      <option value="1">One</option>
-                                      <option value="2">Two</option>
-                                      <option value="3">Three</option>
-                                    </Form.Select>
-                                  </Form.Group>
+                                    <Form.Group className="form-group mb-2 col-3">
+                                      <Form.Label>State</Form.Label>
+                                      <Form.Select
+                                        value={block.state}
+                                        onChange={(e) =>
+                                          handleInputChange(
+                                            block.id,
+                                            "state",
+                                            e.target.value
+                                          )
+                                        }
+                                      >
+                                        <option>Select</option>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                      </Form.Select>
+                                    </Form.Group>
 
-                                  <Form.Group className="form-group mb-2 col-3">
-                                    <Form.Label>City</Form.Label>
-                                    <Form.Select
-                                      value={block.city}
-                                      onChange={(e) =>
-                                        handleInputChange(
-                                          block.id,
-                                          "city",
-                                          e.target.value
-                                        )
-                                      }
-                                    >
-                                      <option>Select</option>
-                                      <option value="1">One</option>
-                                      <option value="2">Two</option>
-                                      <option value="3">Three</option>
-                                    </Form.Select>
-                                  </Form.Group>
+                                    <Form.Group className="form-group mb-2 col-3">
+                                      <Form.Label>City</Form.Label>
+                                      <Form.Select
+                                        value={block.city}
+                                        onChange={(e) =>
+                                          handleInputChange(
+                                            block.id,
+                                            "city",
+                                            e.target.value
+                                          )
+                                        }
+                                      >
+                                        <option>Select</option>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                      </Form.Select>
+                                    </Form.Group>
 
-                                  <Form.Group className="mb-3 col-3">
-                                    <Form.Label>Zip Code</Form.Label>
-                                    <Form.Control
-                                      type="text"
-                                      placeholder="Enter Zip Code"
-                                      value={block.zipCode}
-                                      onChange={(e) =>
-                                        handleInputChange(
-                                          block.id,
-                                          "zipCode",
-                                          e.target.value
-                                        )
-                                      }
-                                    />
-                                  </Form.Group>
+                                    <Form.Group className="mb-3 col-3">
+                                      <Form.Label>Zip Code</Form.Label>
+                                      <Form.Control
+                                        type="text"
+                                        placeholder="Enter Zip Code"
+                                        value={block.zipCode}
+                                        onChange={(e) =>
+                                          handleInputChange(
+                                            block.id,
+                                            "zipCode",
+                                            e.target.value
+                                          )
+                                        }
+                                      />
+                                    </Form.Group>
 
-                                  <Col xl="12">
-                                    <Button
-                                      variant="danger"
-                                      className="delete-btn"
-                                      onClick={() =>
-                                        removeAddressBlock(block.id)
-                                      }
-                                    >
-                                      <i className="bi bi-trash"></i> Delete
-                                    </Button>
-                                  </Col>
-                                </Row>
-                              </Col>
-                            ))}
+                                    <Col xl="12">
+                                      <Button
+                                        variant="danger"
+                                        className="delete-btn"
+                                        onClick={() =>
+                                          removeAddressBlock(block.id)
+                                        }
+                                      >
+                                        <i className="bi bi-trash"></i> Delete
+                                      </Button>
+                                    </Col>
+                                  </Row>
+                                </>
+                              ))}
+                            </Col>
                           </Row>
                           <Col xl="12" className="mt-3">
                             <Button

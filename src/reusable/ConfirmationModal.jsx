@@ -18,6 +18,7 @@ const ConfirmationModal = ({
   onConfirm,
   onCancel,
   isActiveStatus,
+  rowToUpdate
 }) => {
   const [showafterconfirmationModal, setShowafterconfirmationModal] =
     React.useState(false);
@@ -34,7 +35,7 @@ const ConfirmationModal = ({
         <AfterConfirmationModal
           show={showafterconfirmationModal}
           setShow={setShowafterconfirmationModal}
-          isActive={isActiveStatusAfter}
+          isActiveStatus={isActiveStatus}
         />
       </div>
     );
@@ -65,7 +66,7 @@ const ConfirmationModal = ({
             className="btn-lg"
             variant="primary"
             onClick={() => {
-              onConfirm();
+              onConfirm(rowToUpdate);
               setShowafterconfirmationModal(true);
             }}
           >
