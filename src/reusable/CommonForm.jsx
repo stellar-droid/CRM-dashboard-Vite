@@ -171,7 +171,7 @@ const CommonForm = ({ viewOnly, contactAddFormProps }) => {
               </Col>
               {contactAddFormProps && (
                 <>
-                  <Col xl="6">
+                  <Col xl="4">
                     <Form.Group
                       className="form-group mb-2"
                       controlId="formGroupText"
@@ -200,7 +200,7 @@ const CommonForm = ({ viewOnly, contactAddFormProps }) => {
                     </Form.Group>
                   </Col>
 
-                  <Col xl="6">
+                  <Col xl="4">
                     <Form.Group
                       className="form-group mb-2"
                       controlId="formGroupText"
@@ -217,7 +217,7 @@ const CommonForm = ({ viewOnly, contactAddFormProps }) => {
                       />
                     </Form.Group>
                   </Col>
-                  <Col xl="6">
+                  <Col xl="4">
                     <Form.Group
                       className="form-group mb-2"
                       controlId="formGroupText"
@@ -372,10 +372,11 @@ const CommonForm = ({ viewOnly, contactAddFormProps }) => {
                       />
                     </Form.Group>
                   </Col>
-
+                  <Col xl="12" className="mt-2">
+                  <Row>
                   {contactAddFormProps.checkBox && (
                     <>
-                      <Col xl="2">
+                      <Col xl="3">
                         <Form.Check
                           type="checkbox"
                           label={
@@ -390,7 +391,7 @@ const CommonForm = ({ viewOnly, contactAddFormProps }) => {
                           }}
                         />
                       </Col>
-                      <Col xl="2">
+                      <Col xl="3">
                         <Form.Check
                           type="checkbox"
                           label={
@@ -405,7 +406,7 @@ const CommonForm = ({ viewOnly, contactAddFormProps }) => {
                           }}
                         />
                       </Col>
-                      <Col xl="2">
+                      <Col xl="3">
                         <Form.Check
                           type="checkbox"
                           label={
@@ -422,9 +423,11 @@ const CommonForm = ({ viewOnly, contactAddFormProps }) => {
                       </Col>
                     </>
                   )}
+                  </Row>
+                  
+                  </Col>
                   {/* ====================Add More Form START ===================== */}
-                  <Card className="mt-3">
-                    <Card.Body>
+         
                       <div className="address-block">
                         <Form>
                           <Row>
@@ -517,8 +520,8 @@ const CommonForm = ({ viewOnly, contactAddFormProps }) => {
                             <Col xl="12" >
                               {addressBlocks.map((block, index) => (
                                 <>
-                                  <Row key={block.id} className="adress-inner-block">
-                                    <Form.Group className="form-group mb-2 col-4">
+                                  <Row key={block.id} className="adress-inner-block mt-3">
+                                    <Form.Group className="form-group mb-2 col-12">
                                       <Form.Label>Address Type</Form.Label>
                                       <Form.Select
                                         value={block.addressType}
@@ -536,7 +539,7 @@ const CommonForm = ({ viewOnly, contactAddFormProps }) => {
                                       </Form.Select>
                                     </Form.Group>
 
-                                    <Form.Group className="mb-3 col-8">
+                                    <Form.Group className="mb-3 col-12">
                                       <Form.Label>Address</Form.Label>
                                       <Form.Control
                                         type="text"
@@ -552,7 +555,7 @@ const CommonForm = ({ viewOnly, contactAddFormProps }) => {
                                       />
                                     </Form.Group>
 
-                                    <Form.Group className="form-group mb-2 col-3">
+                                    <Form.Group className="form-group mb-2 col-6">
                                       <Form.Label>Country</Form.Label>
                                       <Form.Select
                                         value={block.country}
@@ -571,7 +574,7 @@ const CommonForm = ({ viewOnly, contactAddFormProps }) => {
                                       </Form.Select>
                                     </Form.Group>
 
-                                    <Form.Group className="form-group mb-2 col-3">
+                                    <Form.Group className="form-group mb-2 col-6">
                                       <Form.Label>State</Form.Label>
                                       <Form.Select
                                         value={block.state}
@@ -590,7 +593,7 @@ const CommonForm = ({ viewOnly, contactAddFormProps }) => {
                                       </Form.Select>
                                     </Form.Group>
 
-                                    <Form.Group className="form-group mb-2 col-3">
+                                    <Form.Group className="form-group mb-2 col-6">
                                       <Form.Label>City</Form.Label>
                                       <Form.Select
                                         value={block.city}
@@ -609,7 +612,7 @@ const CommonForm = ({ viewOnly, contactAddFormProps }) => {
                                       </Form.Select>
                                     </Form.Group>
 
-                                    <Form.Group className="mb-3 col-3">
+                                    <Form.Group className="mb-3 col-6">
                                       <Form.Label>Zip Code</Form.Label>
                                       <Form.Control
                                         type="text"
@@ -627,13 +630,13 @@ const CommonForm = ({ viewOnly, contactAddFormProps }) => {
 
                                     <Col xl="12">
                                       <Button
-                                        variant="danger"
+                                        variant="primary"
                                         className="delete-btn"
                                         onClick={() =>
                                           removeAddressBlock(block.id)
                                         }
                                       >
-                                        <i className="bi bi-trash"></i> Delete
+                                        <i className="bi bi-trash"></i>
                                       </Button>
                                     </Col>
                                   </Row>
@@ -653,8 +656,7 @@ const CommonForm = ({ viewOnly, contactAddFormProps }) => {
                           </Col>
                         </Form>
                       </div>
-                    </Card.Body>
-                  </Card>
+            
                   {/* ====================Add More Form END===================== */}
                 </>
               )}
