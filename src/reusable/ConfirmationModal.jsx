@@ -18,7 +18,10 @@ const ConfirmationModal = ({
   onConfirm,
   onCancel,
   isActiveStatus,
-  rowToUpdate
+  rowToUpdate,
+  is_Architect_Biddesk,
+  setIs_Architect_Biddesk,
+  setisActiveStatus,
 }) => {
   const [showafterconfirmationModal, setShowafterconfirmationModal] =
     React.useState(false);
@@ -42,7 +45,7 @@ const ConfirmationModal = ({
   };
 
   useEffect(() => {
-    console.log("Check is delete prop",isDelete)
+    console.log("Check is delete prop", isDelete);
   }, [isDelete]);
   return (
     <>
@@ -57,7 +60,16 @@ const ConfirmationModal = ({
           ) : (
             <p className="mt-4">
               Are you sure you want to set this record as{" "}
-              {isActiveStatus === true ? "In-active" : "Active"} ?
+              {isActiveStatus !== null
+                ? isActiveStatus === true
+                  ? "In-active"
+                  : "Active"
+                : ""}
+              {is_Architect_Biddesk !== null
+                ? is_Architect_Biddesk === true
+                  ? "Non Architect / BidDesk"
+                  : "Architect / BidDesk"
+                : ""}
             </p>
           )}
         </Modal.Body>
@@ -65,9 +77,11 @@ const ConfirmationModal = ({
           <Button
             className="btn-lg"
             variant="primary"
-            onClick={() => {
-              onConfirm(rowToUpdate);
+            onClick={async () => {
+              await onConfirm(rowToUpdate);
               setShowafterconfirmationModal(true);
+              setisActiveStatus(null);
+              setIs_Architect_Biddesk(null);
             }}
           >
             Yes, Set It {isActiveStatus === true ? "In-active" : "Active"}!
@@ -75,7 +89,13 @@ const ConfirmationModal = ({
           <Button
             className="btn-default btn-lg"
             variant="primary"
-            onClick={onCancel}
+            onClick={() => {
+              isActiveStatus !== null
+                ? onCancel("is_Architect_Biddesk")
+                : onCancel("isActiveStatus");
+              setisActiveStatus(null);
+              setIs_Architect_Biddesk(null);
+            }}
           >
             Cancel
           </Button>

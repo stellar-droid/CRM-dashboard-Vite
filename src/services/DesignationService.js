@@ -3,7 +3,7 @@ import axios from '../utils/axios'; // Import axios from your axios instance or 
 // Function to get designations
 const getDesignations = async () => {
   try {
-    const response = await axios.get("/designations/?offset=0&limit=10");
+    const response = await axios.get("/designations/?offset=0&limit=11");
     console.log("DEsignations REquest ", response.data.Data.result);
     return response.data.Data.result;
   } catch (error) {

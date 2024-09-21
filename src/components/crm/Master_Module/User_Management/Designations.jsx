@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import axios from "../../../../utils/axios";
 import { Breadcrumb } from "react-bootstrap";
 import { Card } from "react-bootstrap";
@@ -6,24 +6,34 @@ import { Button, Col, Form, Row } from "react-bootstrap";
 import ReusableTable from "../../../../reusable/ReusableTable";
 import { Offcanvas } from "react-bootstrap";
 import CommonForm from "../../../../reusable/CommonForm";
-import { getDesignations,changeStatus} from "../../../../services/DesignationService";
+import {
+  getDesignations,
+  changeStatus,
+} from "../../../../services/DesignationService";
 import Dropdown from "react-bootstrap/Dropdown";
 
 const Designations = () => {
   const [designationsData, setDesignationsData] = useState([]);
   const [isDesiganations, setisDesiganations] = useState(false);
-  const [refreshData,setRefreshData] = useState(false);
+  const [refreshData, setRefreshData] = useState(false);
   const [showAdd, setShowAdd] = useState(false);
 
   useEffect(() => {
     setisDesiganations(true);
   }, []);
 
+  const fetchDesignations = useCallback(async () => {
+    const response = await getDesignations();
+    const updatedData = response.map((item, index) => ({
+      ...item,
+      srNo: index + 1,
+    }));
+    setDesignationsData(updatedData);
+  }, []);
+
   useEffect(() => {
-    getDesignations().then((response) => {
-      setDesignationsData(response);
-    });
-  }, [refreshData]);
+    fetchDesignations();
+  }, [fetchDesignations, refreshData]);
 
   useEffect(() => {
     console.log("Designations", designationsData);
