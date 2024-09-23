@@ -29,6 +29,11 @@ const ReusableTable = ({
   changeStatus,
   getDesignations,
   setRefreshData,
+  totalPages,
+  limit,
+  page,
+  setLimit,
+  setPage,
 }) => {
   const [showModal, setShowModal] = useState(false);
   const [rowToUpdate, setRowToUpdate] = useState();
@@ -56,6 +61,7 @@ const ReusableTable = ({
     reportingTo: "asc",
     is_architect_biddesk: "asc",
   });
+ 
 
   const handleClick = (headerName) => {
     setSortDirections((prevState) => ({
@@ -180,7 +186,6 @@ const ReusableTable = ({
     lastPageText: "Last",
     showTotal: true, // Show total records
     alwaysShowAllBtns: true, // Always show all buttons
-    
   };
 
   const handleExportPDF = (rowData) => {
@@ -476,9 +481,50 @@ const ReusableTable = ({
     []
   );
 
+  const customTotal = (from, to, size /* = (props.total) */) => (
+    <span className="react-bootstrap-table-pagination-total" role="main">
+     showing {from} to {to} of {size} Results
+    </span>
+  );
+
+  const handleSizeChange = (sizePerPage, page) => {
+    setLimit(sizePerPage);
+    setPage(page);
+  };
+
+  const pagination = paginationFactory({
+    showTotal: true,
+    withFirstAndLast: true,
+    firstPageText: "First",
+    prePageText: "Prev",
+    nextPageText: "Next",
+    lastPageText: "Last",
+    align: "center",
+    sizePerPageList: [
+      { text: "5", value: 5 },
+      { text: "10", value: 10 },
+      { text: "15", value: 15 },
+      { text: "20", value: 20 },
+    ],
+    page: page,
+    pageStartIndex: 1,
+    totalSize: totalPages,
+    sizePerPage: limit,
+    paginationTotalRenderer: customTotal,
+    onPageChange: (page, sizePerPage) => {
+      setLimit(sizePerPage);
+      setPage(page);
+      // setInvalidated(true);
+    },
+    // sizePerPageRenderer: customDropUp,
+    onSizePerPageChange: (sizePerPage, page) => {
+      handleSizeChange(sizePerPage, page);
+    },
+  });
+
   return (
     <>
-      <BootstrapTable
+      {/* <BootstrapTable
         keyField="designationid"
         data={tableData}
         columns={isDesiganations === true ? designationColumns : columns}
@@ -486,7 +532,21 @@ const ReusableTable = ({
         pagination={paginationFactory(paginationOptionsConfig)}
         id="table-to-export"
         
+      /> */}
+
+      <BootstrapTable
+        keyField="designationid"
+        data={tableData}
+        columns={isDesiganations === true ? designationColumns : columns}
+        remote={{
+          pagination: true,
+        }}
+        onTableChange={() => {}}
+        pagination={pagination}
+        bordered={false}
+        wrapperClasses="table-container"        
       />
+
       {statusModal()}
       {deleteModal()}
 

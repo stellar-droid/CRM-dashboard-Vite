@@ -1,11 +1,13 @@
 import axios from '../utils/axios'; // Import axios from your axios instance or configure a new instance if needed
 
 // Function to get designations
-const getDesignations = async () => {
+const getDesignations = async (pages,sizePerPage) => {
+  const page = (pages - 1) * sizePerPage;
+  const limit = sizePerPage;
   try {
-    const response = await axios.get("/designations/?offset=0&limit=11");
+    const response = await axios.get(`/designations/?offset=${page}&limit=${limit}`);
     console.log("DEsignations REquest ", response.data.Data.result);
-    return response.data.Data.result;
+    return response.data.Data;
   } catch (error) {
     console.error(error);
   }

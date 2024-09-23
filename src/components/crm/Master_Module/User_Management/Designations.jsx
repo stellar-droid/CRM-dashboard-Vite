@@ -17,27 +17,39 @@ const Designations = () => {
   const [isDesiganations, setisDesiganations] = useState(false);
   const [refreshData, setRefreshData] = useState(false);
   const [showAdd, setShowAdd] = useState(false);
+  const [totalPages, setTotalPages] = useState(0);
+  const [limit, setLimit] = useState(5);
+  const [page, setPage] = useState(1);
+  const [updatedData, setUpdatedData] = useState([]);
 
   useEffect(() => {
     setisDesiganations(true);
   }, []);
 
   const fetchDesignations = useCallback(async () => {
-    const response = await getDesignations();
-    const updatedData = response.map((item, index) => ({
+    const response = await getDesignations(page, limit);
+    setTotalPages(response.total_records);
+
+    const updatedData = response.result.map((item, index) => ({
       ...item,
-      srNo: index + 1,
+      srNo: (page - 1) * limit + index + 1,
+      reportingTo: item.reportingTo ? item.reportingTo : "N.A",
     }));
+    setUpdatedData(updatedData);
     setDesignationsData(updatedData);
-  }, []);
+  }, [page, limit]);
+
+  const filterFunction = (e) => {
+    console.log("Filter Function", e.target.value);
+    const filteredData = updatedData.filter((designation) =>
+      designation.designationname.toLowerCase().includes(e.target.value.toLowerCase())
+    );
+    setDesignationsData(filteredData);
+  };
 
   useEffect(() => {
     fetchDesignations();
   }, [fetchDesignations, refreshData]);
-
-  useEffect(() => {
-    console.log("Designations", designationsData);
-  }, [designationsData]);
 
   const handleShowAdd = () => setShowAdd(true);
   const handleCloseAdd = () => setShowAdd(false);
@@ -66,7 +78,13 @@ const Designations = () => {
                         className="form-group"
                         controlId="formGroupEmail"
                       >
-                        <Form.Control type="text" placeholder="Name" />
+                        <Form.Control
+                          type="text"
+                          placeholder="Name"
+                          onChange={() => {
+                            filterFunction(event);
+                          }}
+                        />
                       </Form.Group>
                     </Col>
                     <Col xs="3" className=" pe-1">
@@ -86,7 +104,7 @@ const Designations = () => {
                       </Form.Group>
                     </Col>
                     <Col xs="3" className="ps-1 pe-1">
-                      <Button className="search-btn " type="submit">
+                      <Button className="search-btn " type="submit" onClick={(e)=>{e.preventDefault()}}>
                         Search <i className="bi bi-search"></i>
                       </Button>
                     </Col>
@@ -110,6 +128,11 @@ const Designations = () => {
             changeStatus={changeStatus}
             getDesignations={getDesignations}
             setRefreshData={setRefreshData}
+            totalPages={totalPages}
+            setPage={setPage}
+            limit={limit}
+            setLimit={setLimit}
+            page={page}
           />
         </Card.Body>
       </Card>
