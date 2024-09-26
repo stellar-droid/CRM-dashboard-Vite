@@ -1,16 +1,17 @@
 import React, { useEffect, useState, useCallback } from "react";
-import axios from "../../../../utils/axios";
+import axios from "../../../../../utils/axios";
 import { Breadcrumb } from "react-bootstrap";
 import { Card } from "react-bootstrap";
 import { Button, Col, Form, Row } from "react-bootstrap";
-import ReusableTable from "../../../../reusable/ReusableTable";
+import ReusableTable from "../../../../../reusable/ReusableTable";
 import { Offcanvas } from "react-bootstrap";
-import CommonForm from "../../../../reusable/CommonForm";
+import CommonForm from "../../../../../reusable/CommonForm";
 import {
   getDesignations,
   changeStatus,
-} from "../../../../services/DesignationService";
+} from "../../../../../services/DesignationService";
 import Dropdown from "react-bootstrap/Dropdown";
+import AddFormDesignation from "./AddFormDesignation";
 
 const Designations = () => {
   const [designationsData, setDesignationsData] = useState([]);
@@ -23,7 +24,10 @@ const Designations = () => {
   const [updatedData, setUpdatedData] = useState([]);
 
   useEffect(() => {
-    setisDesiganations(true);
+    setisDesiganations(!isDesiganations);
+    return () => {
+      setisDesiganations(false); // or any other cleanup logic
+    };
   }, []);
 
   const fetchDesignations = useCallback(async () => {
@@ -54,6 +58,30 @@ const Designations = () => {
   const handleShowAdd = () => setShowAdd(true);
   const handleCloseAdd = () => setShowAdd(false);
 
+
+  const designationAddFormProps = {
+    department:"Department",
+    designationName:"Designation Name",
+    hasSubDepartment:"Has Sub Department",
+    subDepartment:" Sub Department",
+    buisnessCategory:"Buisness Category",
+    isReported:"Is Reported",
+    isReporting:"Is Reporting",
+    reportingTo:"Reporting To",
+    discountingOnLineItems:{
+    oneTimePrice1:"One Time Price 1",
+    oneTimePrice2:"One Time Price 2",
+    recuringPrice1:"Recuring Price 1",
+    recuringPrice2:"Recuring Price 2",
+    },
+    discountingOnTotal:{
+      oneTimePrice1:"One Time Price 1",
+      oneTimePrice2:"One Time Price 2",
+      recuringPrice1:"Recuring Price 1",
+      recuringPrice2:"Recuring Price 2",
+    },
+
+  };
   return (
     <>
       <div className="crm-header">
@@ -144,11 +172,12 @@ const Designations = () => {
         placement="end"
       >
         <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Add Contact</Offcanvas.Title>
+          <Offcanvas.Title>Add Designation</Offcanvas.Title>
         </Offcanvas.Header>
 
         <Offcanvas.Body>
-          <CommonForm />
+          <AddFormDesignation />
+          {/* <CommonForm isDesiganations={isDesiganations} designationAddFormProps={designationAddFormProps}/> */}
         </Offcanvas.Body>
       </Offcanvas>
     </>

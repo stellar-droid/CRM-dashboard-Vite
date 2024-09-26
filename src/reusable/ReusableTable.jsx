@@ -20,6 +20,7 @@ import { Dropdown } from "react-bootstrap";
 import { jsPDF } from "jspdf";
 import ConfirmationModal from "./ConfirmationModal";
 import { Offcanvas } from "react-bootstrap";
+import AddFormDesignation from "../components/crm/Master_Module/User_Management/Designation/AddFormDesignation";
 const CommonForm = lazy(() => import("./CommonForm"));
 
 const ReusableTable = ({
@@ -569,7 +570,10 @@ const ReusableTable = ({
 
         <Offcanvas.Body>
           <Suspense fallback={<div>Loading...</div>}>
+          {
+            isDesiganations?<AddFormDesignation viewOnly={showView} />:
             <CommonForm viewOnly={showView} />
+          }
           </Suspense>
         </Offcanvas.Body>
       </Offcanvas>

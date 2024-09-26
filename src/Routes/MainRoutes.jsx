@@ -13,7 +13,7 @@ import Dashboard from "../components/crm/Dashboard";
 import Leads from "../components/crm/Leads";
 import Contacts from "../components/crm/Contacts";
 import Companies from "../components/crm/Companies";
-import Designations from "../components/crm/Master_Module/User_Management/Designations";
+import Designations from "../components/crm/Master_Module/User_Management/Designation/Designations";
 
 const MainRoutes = () => {
   return (
