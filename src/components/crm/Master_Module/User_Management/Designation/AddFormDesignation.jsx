@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { Formik, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
@@ -9,7 +9,7 @@ import { useFormik } from "formik";
 import axios from "../../../../../utils/axios";
 import { useMemo } from "react";
 
-const AddFormDesignation = ({ viewOnly }) => {
+const AddFormDesignation = ({ viewOnly,setShowAdd }) => {
   const initialValues = useMemo(
     () => ({
       department: [],
@@ -40,56 +40,70 @@ const AddFormDesignation = ({ viewOnly }) => {
         "Department is required",
         (value) => value && value.length != 0 // For multi-select or non-null value check
       ),
-    hasSubDepartment: Yup.string().required("Has Sub Department is required"),
-    subDepartment: Yup.mixed()
-      .nullable()
-      .required("Department is required")
-      .test(
-        "is-valid-subDepartment",
-        "Has Sub Department is required",
-        (value) => value && value.length != 0 // For multi-select or non-null value check
-      ),
-    buisnessCategory: Yup.mixed()
-      .nullable()
-      .required("Buisness Category is required")
-      .test(
-        "is-valid-buisnessCategory",
-        "Buisness Category is required",
-        (value) => value && value.length != 0 // For multi-select or non-null value check
-      ),
-    isReported: Yup.string().required("Is Reported is required"),
-    isReporting: Yup.string().required("Is Reporting is required"),
-    reportingTo: Yup.mixed()
-      .nullable()
-      .required("Reporting To is required")
-      .test(
-        "is-valid-reportingTo",
-        "Reporting To is required",
-        (value) => value && value.length != 0 // For multi-select or non-null value check
-      ),
-    discountingOnLineItems: Yup.string().required(
-      "Discounting On LineItems is required"
-    ),
-    oneTimePrice1: Yup.string().required("One Time Price 1 is required"),
-    oneTimePrice2: Yup.string().required("One Time Price 2 is required"),
-    recuringPrice1: Yup.string().required("Recuring Price 1 is required"),
-    recuringPrice2: Yup.string().required("Recuring Price 2 is required"),
-    discountingOnTotal: Yup.string().required(
-      "Discounting On Total is required"
-    ),
+    // hasSubDepartment: Yup.string().required("Has Sub Department is required"),
+    // subDepartment: Yup.mixed()
+    //   .nullable()
+    //   .required("Department is required")
+    //   .test(
+    //     "is-valid-subDepartment",
+    //     "Has Sub Department is required",
+    //     (value) => value && value.length != 0 // For multi-select or non-null value check
+    //   ),
+    // buisnessCategory: Yup.mixed()
+    //   .nullable()
+    //   .required("Buisness Category is required")
+    //   .test(
+    //     "is-valid-buisnessCategory",
+    //     "Buisness Category is required",
+    //     (value) => value && value.length != 0 // For multi-select or non-null value check
+    //   ),
+    // isReported: Yup.string().required("Is Reported is required"),
+    // isReporting: Yup.string().required("Is Reporting is required"),
+    // reportingTo: Yup.mixed()
+    //   .nullable()
+    //   .required("Reporting To is required")
+    //   .test(
+    //     "is-valid-reportingTo",
+    //     "Reporting To is required",
+    //     (value) => value && value.length != 0 // For multi-select or non-null value check
+    //   ),
+    // discountingOnLineItems: Yup.string().required(
+    //   "Discounting On LineItems is required"
+    // ),
+    // oneTimePrice1: Yup.string().required("One Time Price 1 is required"),
+    // oneTimePrice2: Yup.string().required("One Time Price 2 is required"),
+    // recuringPrice1: Yup.string().required("Recuring Price 1 is required"),
+    // recuringPrice2: Yup.string().required("Recuring Price 2 is required"),
+    // discountingOnTotal: Yup.string().required(
+    //   "Discounting On Total is required"
+    // ),
   });
 
   const formik = useFormik({
     initialValues,
     validationSchema,
     onSubmit: async (values, { setSubmitting }) => {
+      console.log("HELLO",values)
+      const createObject = {
+        designationname: values.designationName,
+        department: values.department.value,
+        permissionids: "lokesh",
+        usertypeid  : 0,
+        is_sub_department: false,
+        sub_department_id : null,
+        isreporting : false,
+        isreported : false,
+        reportingdesignationid: null,
+        is_active:true,
+      }
       setSubmitting(true);
       try {
         console.log("Form Data", values);
         // Handle form submission logic here
-        const response = await axios.post("/designations", values); // Use values directly instead of formData
+        const response = await axios.post("/designations", createObject); // Use values directly instead of formData
         if (response.status === 200) {
           console.log("Data submitted successfully");
+          setShowAdd(false);
         }
       } catch (error) {
         console.error("Error submitting data", error);
@@ -98,6 +112,10 @@ const AddFormDesignation = ({ viewOnly }) => {
     },
   });
 
+  useEffect(() => {
+    console.log("formik values", formik.values);
+    console.log("formik errors", formik.errors);
+  },[formik])
   const handleReset = () => {
     formik.resetForm();
   };
@@ -245,7 +263,7 @@ const AddFormDesignation = ({ viewOnly }) => {
               )}
             </Form.Group>
           </Col>
-          {/* <Col xl="4">
+          <Col xl="4">
             <Form.Group className="md-2" controlId="formGroupCompany">
               <Form.Label>
                 Buisness Category <span style={{ color: "red" }}>*</span>
@@ -281,7 +299,6 @@ const AddFormDesignation = ({ viewOnly }) => {
               value={formik.values.isReported}
               onChange={formik.handleChange}
               onBlur={() => formik.setFieldTouched("isReported", true)}
-              isRequired={false}
 
               >
                 <option value="yes">Yes</option>
@@ -540,7 +557,7 @@ const AddFormDesignation = ({ viewOnly }) => {
                   </Form.Text>
                 )}
             </Form.Group>
-          </Col> */}
+          </Col>
         </Row>
         <Button variant="primary" type="submit" disabled={formik.isSubmitting}>
           Submit

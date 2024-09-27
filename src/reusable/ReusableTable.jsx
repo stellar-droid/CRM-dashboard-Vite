@@ -55,7 +55,7 @@ const ReusableTable = ({
     sellingPriceRecurring: "asc",
     expiryDate: "asc",
     isApproved: "asc",
-    isActive: "asc",
+    is_active: "asc",
     designationName: "asc",
     department: "asc",
     subDepartment: "asc",
@@ -231,12 +231,12 @@ const ReusableTable = ({
       {
         dataField: "srNo",
         text: "Sr. No",
-        sort: false,
-        classes: "sortable-cell", // Add custom class to each cell in this column
+        sort: true,
+        classes: `sortable-cell ${sortDirections.srNo}`, // Add custom class to each cell in this column
         headerClasses: `sortable-header-srNo ${sortDirections.srNo}`, // Add custom class to the header of this column
-        // headerFormatter: (column, colIndex) => (
-        //   <span onClick={() => handleClick("srNo")}>Sr. No</span>
-        // ),
+        headerFormatter: (column, colIndex) => (
+          <span onClick={() => handleClick("srNo")}>Sr. No</span>
+        ),
       },
       {
         dataField: "designationname",
@@ -282,9 +282,9 @@ const ReusableTable = ({
         dataField: "is_active",
         text: "Is Active",
         sort: true,
-        headerClasses: `sortable-header-isActive ${sortDirections.isActive}`,
+        headerClasses: `sortable-header-is_active ${sortDirections.is_active}`,
         headerFormatter: (column, colIndex) => (
-          <span onClick={() => handleClick("isActive")}>Is Active</span>
+          <span onClick={() => handleClick("is_active")}>Is Active</span>
         ),
         formatter: (cell, row) => (
           <Switch

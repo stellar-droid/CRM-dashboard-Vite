@@ -24,10 +24,10 @@ const Designations = () => {
   const [updatedData, setUpdatedData] = useState([]);
 
   useEffect(() => {
-    setisDesiganations(!isDesiganations);
-    return () => {
-      setisDesiganations(false); // or any other cleanup logic
-    };
+    setisDesiganations(true);
+    // return () => {
+    //   setisDesiganations(false); // or any other cleanup logic
+    // };
   }, []);
 
   const fetchDesignations = useCallback(async () => {
@@ -38,6 +38,7 @@ const Designations = () => {
       ...item,
       srNo: (page - 1) * limit + index + 1,
       reportingTo: item.reportingTo ? item.reportingTo : "N.A",
+    
     }));
     setUpdatedData(updatedData);
     setDesignationsData(updatedData);
@@ -45,7 +46,7 @@ const Designations = () => {
 
   const filterFunction = (e) => {
     console.log("Filter Function", e.target.value);
-    const filteredData = updatedData.filter((designation) =>
+    const filteredData = designationsData.filter((designation) =>
       designation.designationname.toLowerCase().includes(e.target.value.toLowerCase())
     );
     setDesignationsData(filteredData);
@@ -176,7 +177,7 @@ const Designations = () => {
         </Offcanvas.Header>
 
         <Offcanvas.Body>
-          <AddFormDesignation />
+          <AddFormDesignation setShowAdd={setShowAdd}/>
           {/* <CommonForm isDesiganations={isDesiganations} designationAddFormProps={designationAddFormProps}/> */}
         </Offcanvas.Body>
       </Offcanvas>
