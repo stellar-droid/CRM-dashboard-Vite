@@ -11,6 +11,7 @@ import 'react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.m
 import 'react-bootstrap-table2-filter/dist/react-bootstrap-table2-filter.min.css';
 import 'flatpickr/dist/themes/material_blue.css'; 
 import "primereact/resources/themes/lara-light-cyan/theme.css";
+import "react-toastify/dist/ReactToastify.css";
 import MainRoutes from './Routes/MainRoutes';
 import './App.css';
 

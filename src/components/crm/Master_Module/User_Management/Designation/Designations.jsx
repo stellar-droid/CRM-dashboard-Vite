@@ -21,7 +21,7 @@ const Designations = () => {
   const [totalPages, setTotalPages] = useState(0);
   const [limit, setLimit] = useState(5);
   const [page, setPage] = useState(1);
-  const [updatedData, setUpdatedData] = useState([]);
+const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     setisDesiganations(true);
@@ -38,18 +38,25 @@ const Designations = () => {
       ...item,
       srNo: (page - 1) * limit + index + 1,
       reportingTo: item.reportingTo ? item.reportingTo : "N.A",
-    
     }));
-    setUpdatedData(updatedData);
+
     setDesignationsData(updatedData);
   }, [page, limit]);
 
   const filterFunction = (e) => {
     console.log("Filter Function", e.target.value);
+    setSearchQuery(e.target.value);
+    if (searchQuery === "") {
+      setDesignationsData(designationsData); // Reset to original data if search query is empty
+    }
+    else {
     const filteredData = designationsData.filter((designation) =>
-      designation.designationname.toLowerCase().includes(e.target.value.toLowerCase())
+      designation.designationname
+        .toLowerCase()
+        .includes(searchQuery.toLowerCase())
     );
     setDesignationsData(filteredData);
+  }
   };
 
   useEffect(() => {
@@ -59,29 +66,27 @@ const Designations = () => {
   const handleShowAdd = () => setShowAdd(true);
   const handleCloseAdd = () => setShowAdd(false);
 
-
   const designationAddFormProps = {
-    department:"Department",
-    designationName:"Designation Name",
-    hasSubDepartment:"Has Sub Department",
-    subDepartment:" Sub Department",
-    buisnessCategory:"Buisness Category",
-    isReported:"Is Reported",
-    isReporting:"Is Reporting",
-    reportingTo:"Reporting To",
-    discountingOnLineItems:{
-    oneTimePrice1:"One Time Price 1",
-    oneTimePrice2:"One Time Price 2",
-    recuringPrice1:"Recuring Price 1",
-    recuringPrice2:"Recuring Price 2",
+    department: "Department",
+    designationName: "Designation Name",
+    hasSubDepartment: "Has Sub Department",
+    subDepartment: " Sub Department",
+    buisnessCategory: "Buisness Category",
+    isReported: "Is Reported",
+    isReporting: "Is Reporting",
+    reportingTo: "Reporting To",
+    discountingOnLineItems: {
+      oneTimePrice1: "One Time Price 1",
+      oneTimePrice2: "One Time Price 2",
+      recuringPrice1: "Recuring Price 1",
+      recuringPrice2: "Recuring Price 2",
     },
-    discountingOnTotal:{
-      oneTimePrice1:"One Time Price 1",
-      oneTimePrice2:"One Time Price 2",
-      recuringPrice1:"Recuring Price 1",
-      recuringPrice2:"Recuring Price 2",
+    discountingOnTotal: {
+      oneTimePrice1: "One Time Price 1",
+      oneTimePrice2: "One Time Price 2",
+      recuringPrice1: "Recuring Price 1",
+      recuringPrice2: "Recuring Price 2",
     },
-
   };
   return (
     <>
@@ -133,7 +138,13 @@ const Designations = () => {
                       </Form.Group>
                     </Col>
                     <Col xs="3" className="ps-1 pe-1">
-                      <Button className="search-btn " type="submit" onClick={(e)=>{e.preventDefault()}}>
+                      <Button
+                        className="search-btn "
+                        type="submit"
+                        onClick={(e) => {
+                          e.preventDefault();
+                        }}
+                      >
                         Search <i className="bi bi-search"></i>
                       </Button>
                     </Col>
@@ -177,7 +188,7 @@ const Designations = () => {
         </Offcanvas.Header>
 
         <Offcanvas.Body>
-          <AddFormDesignation setShowAdd={setShowAdd}/>
+          <AddFormDesignation setShowAdd={setShowAdd} />
           {/* <CommonForm isDesiganations={isDesiganations} designationAddFormProps={designationAddFormProps}/> */}
         </Offcanvas.Body>
       </Offcanvas>

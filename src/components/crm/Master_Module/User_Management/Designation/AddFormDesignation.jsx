@@ -8,12 +8,22 @@ import Flatpickr from "react-flatpickr";
 import { useFormik } from "formik";
 import axios from "../../../../../utils/axios";
 import { useMemo } from "react";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-const AddFormDesignation = ({ viewOnly,setShowAdd }) => {
+const AddFormDesignation = ({
+  viewOnly,
+  setShowAdd,
+  rowToUpdate,
+  editOnly,
+  setShowEdit,
+  setRefreshData
+}) => {
   const initialValues = useMemo(
     () => ({
       department: [],
-      designationName: "",
+      designationName:
+        viewOnly || editOnly === true ? rowToUpdate.designationname : "",
       hasSubDepartment: "",
       subDepartment: [],
       buisnessCategory: [],
@@ -83,30 +93,43 @@ const AddFormDesignation = ({ viewOnly,setShowAdd }) => {
     initialValues,
     validationSchema,
     onSubmit: async (values, { setSubmitting }) => {
-      console.log("HELLO",values)
+      console.log("HELLO", values);
       const createObject = {
         designationname: values.designationName,
         department: values.department.value,
         permissionids: "lokesh",
-        usertypeid  : 0,
+        usertypeid: 0,
         is_sub_department: false,
-        sub_department_id : null,
-        isreporting : false,
-        isreported : false,
+        sub_department_id: null,
+        isreporting: false,
+        isreported: false,
         reportingdesignationid: null,
-        is_active:true,
-      }
+        is_active: true,
+      };
       setSubmitting(true);
       try {
         console.log("Form Data", values);
         // Handle form submission logic here
+        if(editOnly){
+          const response = await axios.put(`/designations/${rowToUpdate.designationid}`, createObject);
+          if (response.status === 200) {
+            setShowEdit(false);
+            setRefreshData(Math.random());
+            toast.success("Data updated successfully");
+            console.log("Data updated successfully");
+          }
+        }
+        else {
         const response = await axios.post("/designations", createObject); // Use values directly instead of formData
         if (response.status === 200) {
+          setShowAdd(false); 
+          toast.success("Data submitted successfully");
           console.log("Data submitted successfully");
-          setShowAdd(false);
         }
+      }
       } catch (error) {
         console.error("Error submitting data", error);
+        toast.error("Failed to submit data");
       }
       setSubmitting(false); // Set submitting to false when the submission is complete
     },
@@ -115,7 +138,7 @@ const AddFormDesignation = ({ viewOnly,setShowAdd }) => {
   useEffect(() => {
     console.log("formik values", formik.values);
     console.log("formik errors", formik.errors);
-  },[formik])
+  }, [formik]);
   const handleReset = () => {
     formik.resetForm();
   };
@@ -201,6 +224,7 @@ const AddFormDesignation = ({ viewOnly,setShowAdd }) => {
                 type="text"
                 name="designationName"
                 placeholder="Enter Designation Name"
+                disabled={viewOnly}
                 value={formik.values.designationName}
                 onChange={formik.handleChange}
                 isInvalid={
@@ -248,7 +272,7 @@ const AddFormDesignation = ({ viewOnly,setShowAdd }) => {
               <Select
                 options={subDepartmentOptions}
                 aria-label="Sub Department"
-                disabled={viewOnly}
+                isDisabled={viewOnly}
                 name="subDepartment"
                 value={formik.values.subDepartment}
                 onChange={(selectedOption) =>
@@ -292,14 +316,13 @@ const AddFormDesignation = ({ viewOnly,setShowAdd }) => {
               <Form.Label>
                 Is Reported <span style={{ color: "red" }}>*</span>
               </Form.Label>
-              <Form.Select 
-              aria-label="Is Reported" 
-              disabled={viewOnly}
-              name="isReported"
-              value={formik.values.isReported}
-              onChange={formik.handleChange}
-              onBlur={() => formik.setFieldTouched("isReported", true)}
-
+              <Form.Select
+                aria-label="Is Reported"
+                disabled={viewOnly}
+                name="isReported"
+                value={formik.values.isReported}
+                onChange={formik.handleChange}
+                onBlur={() => formik.setFieldTouched("isReported", true)}
               >
                 <option value="yes">Yes</option>
                 <option value="no">No</option>
@@ -565,6 +588,7 @@ const AddFormDesignation = ({ viewOnly,setShowAdd }) => {
         <Button variant="primary" onClick={handleReset} className="ms-2">
           Reset
         </Button>
+       
       </Form>
     </>
   );

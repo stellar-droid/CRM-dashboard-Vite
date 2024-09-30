@@ -42,6 +42,7 @@
     "react-router-dom": "^6.26.0",
     "react-scripts": "5.0.1",
     "react-select": "^5.8.0",
+    "react-toastify": "^10.0.5",
     "styled-components": "^6.1.12",
     "web-vitals": "^4.2.3",
     "yup": "^1.4.0"

@@ -21,6 +21,7 @@ import { jsPDF } from "jspdf";
 import ConfirmationModal from "./ConfirmationModal";
 import { Offcanvas } from "react-bootstrap";
 import AddFormDesignation from "../components/crm/Master_Module/User_Management/Designation/AddFormDesignation";
+import { ToastContainer } from "react-toastify";
 const CommonForm = lazy(() => import("./CommonForm"));
 
 const ReusableTable = ({
@@ -62,7 +63,6 @@ const ReusableTable = ({
     reportingTo: "asc",
     is_architect_biddesk: "asc",
   });
- 
 
   const handleClick = (headerName) => {
     setSortDirections((prevState) => ({
@@ -122,13 +122,15 @@ const ReusableTable = ({
   const handleCloseView = () => {
     showView ? setShowView(false) : setShowEdit(false);
   };
-  const handleView = (id) => {
+  const handleView = (row) => {
     // Handle view action
+    setRowToUpdate(row);
     handleShowView();
   };
 
-  const handleEdit = (id) => {
+  const handleEdit = (row) => {
     // Handle edit action
+    setRowToUpdate(row);
     handleShowEdit();
   };
 
@@ -324,10 +326,10 @@ const ReusableTable = ({
             </Dropdown.Toggle>
 
             <Dropdown.Menu>
-              <Dropdown.Item onClick={() => handleView(row.id)}>
+              <Dropdown.Item onClick={() => handleView(row)}>
                 <i className="bi bi-eye"></i> View
               </Dropdown.Item>
-              <Dropdown.Item onClick={() => handleEdit(row.id)}>
+              <Dropdown.Item onClick={() => handleEdit(row)}>
                 <i className="bi bi-pen"></i> Edit
               </Dropdown.Item>
               <Dropdown.Item onClick={() => handleExportPDF(row)}>
@@ -484,7 +486,7 @@ const ReusableTable = ({
 
   const customTotal = (from, to, size /* = (props.total) */) => (
     <span className="react-bootstrap-table-pagination-total" role="main">
-     showing {from} to {to} of {size} Results
+      showing {from} to {to} of {size} Results
     </span>
   );
 
@@ -545,7 +547,7 @@ const ReusableTable = ({
         onTableChange={() => {}}
         pagination={pagination}
         bordered={false}
-        wrapperClasses="table-container"        
+        wrapperClasses="table-container"
       />
 
       {statusModal()}
@@ -570,13 +572,21 @@ const ReusableTable = ({
 
         <Offcanvas.Body>
           <Suspense fallback={<div>Loading...</div>}>
-          {
-            isDesiganations?<AddFormDesignation viewOnly={showView} />:
-            <CommonForm viewOnly={showView} />
-          }
+            {isDesiganations ? (
+              <AddFormDesignation
+                viewOnly={showView}
+                editOnly={showEdit}
+                rowToUpdate={rowToUpdate}
+                setShowEdit={setShowEdit}
+                setRefreshData={setRefreshData}
+              />
+            ) : (
+              <CommonForm viewOnly={showView} />
+            )}
           </Suspense>
         </Offcanvas.Body>
       </Offcanvas>
+      <ToastContainer />
     </>
   );
 };
