@@ -13,6 +13,18 @@ const getDesignations = async (pages,sizePerPage) => {
   }
 };
 
+const getDesignationsByNames = async (designationsName) => {
+  console.log("Designations Name SERVICE", designationsName);
+  try {
+    const response = await axios.get(`/designations/name/${designationsName}`);
+    console.log("DEsignations SEARCH REquest ", response);
+    return response;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+
 const changeStatus = async (id, status_is_active,status_is_architect_biddesk) => {
 console.log("Change Status Request", id, status_is_active);
   const paramas = {
@@ -28,4 +40,4 @@ console.log("Change Status Request", id, status_is_active);
   }
 };
 
-export { getDesignations,changeStatus };
+export { getDesignations,changeStatus,getDesignationsByNames };

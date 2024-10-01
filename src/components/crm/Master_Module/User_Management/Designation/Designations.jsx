@@ -9,9 +9,11 @@ import CommonForm from "../../../../../reusable/CommonForm";
 import {
   getDesignations,
   changeStatus,
+  getDesignationsByNames,
 } from "../../../../../services/DesignationService";
 import Dropdown from "react-bootstrap/Dropdown";
 import AddFormDesignation from "./AddFormDesignation";
+import { toast } from "react-toastify";
 
 const Designations = () => {
   const [designationsData, setDesignationsData] = useState([]);
@@ -21,7 +23,8 @@ const Designations = () => {
   const [totalPages, setTotalPages] = useState(0);
   const [limit, setLimit] = useState(5);
   const [page, setPage] = useState(1);
-const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [originalData, setOriginalData] = useState([]);
 
   useEffect(() => {
     setisDesiganations(true);
@@ -32,6 +35,7 @@ const [searchQuery, setSearchQuery] = useState("");
 
   const fetchDesignations = useCallback(async () => {
     const response = await getDesignations(page, limit);
+    console.log("DEsignations GET REQUEST ", response);
     setTotalPages(response.total_records);
 
     const updatedData = response.result.map((item, index) => ({
@@ -41,21 +45,48 @@ const [searchQuery, setSearchQuery] = useState("");
     }));
 
     setDesignationsData(updatedData);
+    setOriginalData(updatedData);
   }, [page, limit]);
 
-  const filterFunction = (e) => {
-    console.log("Filter Function", e.target.value);
-    setSearchQuery(e.target.value);
+  // const filterFunction = (e) => {
+  //   const query = e.target.value.toLowerCase();
+  //   setSearchQuery(query);
+
+  //   if (query === "") {
+  //     setDesignationsData(originalData);
+  //   } else {
+  //     const filteredData = originalData.filter((designation) =>
+  //       designation.designationname.toLowerCase().includes(query)
+  //     );
+  //     setDesignationsData(filteredData);
+  //   }
+  // };
+
+  const handleChangeFilterQuery = (e) => {
+    const query = e.target.value;
+    setSearchQuery(query);
+  };
+
+  const handleSearch = async () => {
+
+
     if (searchQuery === "") {
-      setDesignationsData(designationsData); // Reset to original data if search query is empty
+      setDesignationsData(originalData);
     }
     else {
-    const filteredData = designationsData.filter((designation) =>
-      designation.designationname
-        .toLowerCase()
-        .includes(searchQuery.toLowerCase())
-    );
-    setDesignationsData(filteredData);
+    try {
+      const response = await getDesignationsByNames(searchQuery);
+      console.log("Search Response", response);
+      if (response.status == 200) {
+        const responseData = [response.data.Data];
+        console.log("responseData",responseData)
+        setDesignationsData(responseData);
+        toast.success("Designation Found");
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("Designation Not Found");
+    }
   }
   };
 
@@ -115,8 +146,9 @@ const [searchQuery, setSearchQuery] = useState("");
                         <Form.Control
                           type="text"
                           placeholder="Name"
-                          onChange={() => {
-                            filterFunction(event);
+                          onChange={(event) => {
+                            // filterFunction(event);
+                            handleChangeFilterQuery(event);
                           }}
                         />
                       </Form.Group>
@@ -143,6 +175,7 @@ const [searchQuery, setSearchQuery] = useState("");
                         type="submit"
                         onClick={(e) => {
                           e.preventDefault();
+                          handleSearch();
                         }}
                       >
                         Search <i className="bi bi-search"></i>

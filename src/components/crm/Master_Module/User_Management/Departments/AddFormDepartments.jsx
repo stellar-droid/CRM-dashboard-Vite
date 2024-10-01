@@ -1,17 +1,6 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
-import { Formik, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
-import { Row, Col, Button, Form } from "react-bootstrap";
-import Select from "react-select";
-import Flatpickr from "react-flatpickr";
-import { useFormik } from "formik";
-import axios from "../../../../../utils/axios";
-import { useMemo } from "react";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import React from "react";
 
-const AddFormDesignation = ({
+const AddFormDepartments = ({
   viewOnly,
   setShowAdd,
   rowToUpdate,
@@ -19,8 +8,6 @@ const AddFormDesignation = ({
   setShowEdit,
   setRefreshData,
 }) => {
-
-  
   const initialValues = useMemo(
     () => ({
       department: [],
@@ -598,4 +585,4 @@ const AddFormDesignation = ({
   );
 };
 
-export default AddFormDesignation;
+export default AddFormDepartments;
